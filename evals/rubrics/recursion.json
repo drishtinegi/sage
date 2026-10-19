@@ -2,51 +2,58 @@
   "title": "Recursion",
   "concept_map": {
     "key_ideas": [
-      "Self-referential functions",
-      "Base case condition",
-      "Call stack and stack frames",
-      "Stack unwinding",
-      "Stack overflow"
+      "Base Case",
+      "Recursive Step",
+      "Call Stack and Stack Frames",
+      "Stack Unwinding",
+      "Stack Overflow",
+      "Tail Recursion"
     ],
     "prerequisites": [
-      "Functions and return values",
-      "Parameters and local variables",
-      "Call stack mechanics"
+      "Functions and Parameter Passing",
+      "Control Flow (Conditionals)",
+      "Call Stack Concept",
+      "Variable Scope"
     ]
   },
   "misconceptions": [
-    "Recursive calls share the exact same stack frame, parameters, and local variables.",
-    "A recursive function without a base case will run forever without crashing.",
-    "Reaching the base case instantly returns the final answer to the original caller without unwinding previous recursive calls.",
-    "Recursive calls solve larger or equal-sized instances of the original problem."
+    "A recursive function runs faster and uses less memory than an equivalent iterative loop.",
+    "When a recursive function calls itself, it reuses and overwrites the exact same local variables in memory.",
+    "The return value from the base case automatically jumps back to the original outer caller without unwinding through intermediate function calls.",
+    "Infinite recursion will run forever in a loop without causing a program crash.",
+    "A base case is optional if the function uses a conditional loop to stop executing."
   ],
   "rubric": [
     {
-      "text": "Defines recursion as a function calling itself to solve a smaller version of the same problem.",
+      "text": "Defines recursion as a method where a function calls itself directly or indirectly to solve a larger problem by breaking it into smaller instances.",
       "weight": 3
     },
     {
-      "text": "Explains that a base case is the condition where the function stops calling itself and returns a value directly.",
+      "text": "Explains that every valid recursive function requires at least one base case that produces a result without making further recursive calls.",
       "weight": 3
     },
     {
-      "text": "States that omitting a base case causes the function to never stop calling itself.",
+      "text": "Explains that the recursive step must modify input arguments to bring subsequent subproblems strictly closer to a base case.",
+      "weight": 3
+    },
+    {
+      "text": "Describes how each recursive call pushes a new stack frame onto the execution call stack to maintain distinct local variables and execution state.",
       "weight": 2
     },
     {
-      "text": "Explains that each recursive call adds a new stack frame to the call stack containing its own parameters and local variables.",
+      "text": "Explains the unwinding phase, where control and return values flow backward through the stack frame instances after hitting a base case.",
       "weight": 2
     },
     {
-      "text": "Describes stack unwinding as the step-by-step process where recursive calls return one by one after reaching the base case.",
+      "text": "Identifies stack overflow as a runtime error caused by exceeding memory limits when recursive calls continue infinitely or too deeply.",
       "weight": 2
     },
     {
-      "text": "Explains that excessively deep recursion exhausts available call stack space and causes a stack overflow crash.",
-      "weight": 2
+      "text": "Compares time and space complexity of recursive solutions against iterative alternatives, noting memory overhead from stack frames.",
+      "weight": 1
     },
     {
-      "text": "Uses the factorial function where factorial(n) = n * factorial(n - 1) with base case factorial(0) = 1 to demonstrate recursion.",
+      "text": "Explains tail recursion as a special form where the recursive call is the final operation, enabling tail-call optimization by reusing stack frames.",
       "weight": 1
     }
   ]

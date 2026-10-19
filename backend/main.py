@@ -1,28 +1,94 @@
-import os
-from pathlib import Path
-from dotenv import load_dotenv
-from fastapi import FastAPI
+import logging
+
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import create_engine, text
+from sqlalchemy import func, select, text
+from sqlalchemy.orm import Session
 
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+from brief import make_brief
+from db import Base, engine, get_db
+from models import RubricItem, Topic
+from schemas import TopicCreate, TopicOut
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./explainback.db")
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {},
-)
+log = logging.getLogger("explainback")
+
+Base.metadata.create_all(engine)  # creates the tables if they don't exist
 
 app = FastAPI(title="Explain-Back")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+def to_out(topic: Topic) -> TopicOut:
+    count = sum(1 for i in topic.items if not i.is_misconception)
+    return TopicOut(id=topic.id, title=topic.title, rubric_count=count)
+
 
 @app.get("/health")
 def health():
     with engine.connect() as conn:
         conn.execute(text("SELECT 1"))
     return {"status": "ok", "db": "connected"}
+
+
+@app.post("/topics", response_model=TopicOut)
+def create_topic(body: TopicCreate, db: Session = Depends(get_db)):
+    title = body.title.strip()
+    notes = (body.notes or "").strip()
+
+    # Reuse a stored rubric for a plain topic name, so it stays stable and saves API calls
+    if not notes:
+        existing = db.scalars(
+            select(Topic).where(
+                func.lower(Topic.title) == title.lower(),
+                Topic.source_notes.is_(None),
+            )
+        ).first()
+        if existing:
+            return to_out(existing)
+
+    try:
+        brief = make_brief(title, notes)
+    except Exception:
+        log.exception("brief generation failed")
+        raise HTTPException(502, "Could not build the topic right now. Please try again.")
+
+    topic = Topic(
+        title=title,
+        source_notes=notes or None,
+        concept_map=brief.concept_map.model_dump(),
+    )
+    for pos, item in enumerate(brief.rubric, 1):
+        topic.items.append(
+            RubricItem(position=pos, text=item.text, weight=item.weight, is_misconception=False)
+        )
+    for pos, m in enumerate(brief.misconceptions, len(brief.rubric) + 1):
+        topic.items.append(
+            RubricItem(position=pos, text=m, weight=0, is_misconception=True)
+        )
+    db.add(topic)
+    db.commit()
+    db.refresh(topic)
+    return to_out(topic)
+
+
+# DEV ONLY: lets you inspect a stored rubric. Remove or lock this before real users;
+# the rubric is only shown to the student in the final report.
+@app.get("/topics/{topic_id}/rubric")
+def dev_rubric(topic_id: int, db: Session = Depends(get_db)):
+    topic = db.get(Topic, topic_id)
+    if not topic:
+        raise HTTPException(404, "topic not found")
+    return {
+        "title": topic.title,
+        "concept_map": topic.concept_map,
+        "rubric": [
+            {"position": i.position, "weight": i.weight, "text": i.text}
+            for i in topic.items if not i.is_misconception
+        ],
+        "misconceptions": [i.text for i in topic.items if i.is_misconception],
+    }

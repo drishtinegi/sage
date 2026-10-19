@@ -12,7 +12,7 @@ Rules:
 - If notes are provided, ground every rubric item and misconception in those notes.
   Do not add facts that the notes do not support.
 - If the notes are empty, use well-established, textbook-level knowledge only.
-- Rubric: 6 to 10 items. Each item is ONE specific idea that a correct explanation
+- Rubric: 4 to 10 items. Each item is ONE specific idea that a correct explanation
   must cover, written as a checkable statement (for example "Explains that every
   recursive function needs a base case that stops the recursion").
 - Items must not overlap, must not be trivia, and must not be vague ("understands X").
@@ -22,6 +22,8 @@ Rules:
   each written as the wrong belief itself.
 - Concept map: key_ideas (the main concepts) and prerequisites (what a learner
   should know first).
+- Every misconception must be addressed by at least one rubric item.
+- Write complete, correctly spaced English words.
 
 Return ONLY valid JSON, with no markdown fences and no commentary, in this shape:
 
