@@ -1,0 +1,62 @@
+{
+  "title": "Database Normalization",
+  "concept_map": {
+    "key_ideas": [
+      "Data Redundancy",
+      "Modification Anomalies",
+      "Functional Dependencies",
+      "Normal Forms (1NF, 2NF, 3NF, BCNF)",
+      "Lossless Decomposition"
+    ],
+    "prerequisites": [
+      "Relational Model Concepts",
+      "Tables, Attributes, and Tuples",
+      "Primary Keys and Foreign Keys",
+      "Basic SQL Operations"
+    ]
+  },
+  "misconceptions": [
+    "Higher levels of normalization always increase query execution speed.",
+    "First Normal Form (1NF) simply means that a table has a primary key defined.",
+    "A production database should always be fully normalized to the highest form regardless of performance requirements.",
+    "Denormalization is always a bad design choice that reflects a failure to understand normalization theory."
+  ],
+  "rubric": [
+    {
+      "text": "Defines database normalization as the systematic process of structuring a relational database schema to reduce data redundancy and ensure data integrity.",
+      "weight": 3
+    },
+    {
+      "text": "Explains the three types of modification anomalies (insertion, update, and deletion anomalies) caused by unnormalized database schemas.",
+      "weight": 3
+    },
+    {
+      "text": "Defines functional dependency (X -> Y) as a constraint where a set of attributes X uniquely determines the value of attribute set Y.",
+      "weight": 2
+    },
+    {
+      "text": "Explains First Normal Form (1NF), requiring that each table cell contains atomic (indivisible) values and that repeating groups or arrays are eliminated.",
+      "weight": 3
+    },
+    {
+      "text": "Explains Second Normal Form (2NF), requiring a table to be in 1NF and ensuring that all non-prime attributes are fully functionally dependent on the entire candidate key, eliminating partial dependencies.",
+      "weight": 3
+    },
+    {
+      "text": "Explains Third Normal Form (3NF), requiring a table to be in 2NF and ensuring that no non-prime attribute is transitively dependent on a candidate key.",
+      "weight": 3
+    },
+    {
+      "text": "Explains Boyce-Codd Normal Form (BCNF), describing it as a stricter version of 3NF where for every non-trivial functional dependency X -> Y, X must be a superkey.",
+      "weight": 2
+    },
+    {
+      "text": "Explains the concept of lossless-join decomposition, ensuring that breaking a relation into smaller relations does not generate spurious tuples when joined back.",
+      "weight": 2
+    },
+    {
+      "text": "Explains the trade-offs of denormalization, describing how intentional redundancy can improve read query performance at the cost of write complexity and storage.",
+      "weight": 1
+    }
+  ]
+}

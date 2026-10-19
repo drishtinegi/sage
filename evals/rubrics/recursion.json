@@ -1,0 +1,53 @@
+{
+  "title": "Recursion",
+  "concept_map": {
+    "key_ideas": [
+      "Self-referential functions",
+      "Base case condition",
+      "Call stack and stack frames",
+      "Stack unwinding",
+      "Stack overflow"
+    ],
+    "prerequisites": [
+      "Functions and return values",
+      "Parameters and local variables",
+      "Call stack mechanics"
+    ]
+  },
+  "misconceptions": [
+    "Recursive calls share the exact same stack frame, parameters, and local variables.",
+    "A recursive function without a base case will run forever without crashing.",
+    "Reaching the base case instantly returns the final answer to the original caller without unwinding previous recursive calls.",
+    "Recursive calls solve larger or equal-sized instances of the original problem."
+  ],
+  "rubric": [
+    {
+      "text": "Defines recursion as a function calling itself to solve a smaller version of the same problem.",
+      "weight": 3
+    },
+    {
+      "text": "Explains that a base case is the condition where the function stops calling itself and returns a value directly.",
+      "weight": 3
+    },
+    {
+      "text": "States that omitting a base case causes the function to never stop calling itself.",
+      "weight": 2
+    },
+    {
+      "text": "Explains that each recursive call adds a new stack frame to the call stack containing its own parameters and local variables.",
+      "weight": 2
+    },
+    {
+      "text": "Describes stack unwinding as the step-by-step process where recursive calls return one by one after reaching the base case.",
+      "weight": 2
+    },
+    {
+      "text": "Explains that excessively deep recursion exhausts available call stack space and causes a stack overflow crash.",
+      "weight": 2
+    },
+    {
+      "text": "Uses the factorial function where factorial(n) = n * factorial(n - 1) with base case factorial(0) = 1 to demonstrate recursion.",
+      "weight": 1
+    }
+  ]
+}

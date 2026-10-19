@@ -1,0 +1,10 @@
+Recursion is when a function calls itself to solve a smaller version of the same problem.
+Every recursive function needs a base case, which is the condition where it stops calling
+itself and returns a value directly. Without a base case the function never stops.
+
+Each recursive call is added to the call stack as a new stack frame holding that call's
+parameters and local variables. When the base case is reached, the calls return one by one
+and the stack unwinds. If the recursion is too deep, the stack runs out of space and the
+program crashes with a stack overflow.
+
+Example: factorial(n) = n * factorial(n - 1), with factorial(0) = 1 as the base case.

@@ -1,0 +1,58 @@
+{
+  "title": "TCP Three-Way Handshake",
+  "concept_map": {
+    "key_ideas": [
+      "Connection-oriented protocol establishment",
+      "SYN, SYN-ACK, and ACK flags",
+      "Sequence number synchronization",
+      "Full-duplex communication setup",
+      "Initial Sequence Number (ISN) generation"
+    ],
+    "prerequisites": [
+      "Transport layer fundamentals",
+      "Client-server model",
+      "IP addressing and port numbers",
+      "Packet header structures"
+    ]
+  },
+  "misconceptions": [
+    "Believing that the initial sequence numbers (ISNs) always start at zero.",
+    "Thinking that user application payload data is typically transmitted inside the initial SYN packet.",
+    "Assuming the handshake only verifies that the server exists rather than synchronizing parameters for reliable delivery.",
+    "Believing the server can start sending application data before receiving the final ACK segment from the client."
+  ],
+  "rubric": [
+    {
+      "text": "Explains that TCP is a connection-oriented protocol that requires setting up a stateful connection before exchanging application data.",
+      "weight": 3
+    },
+    {
+      "text": "States that the client initiates the connection by sending a SYN packet containing its Initial Sequence Number (ISN) to the server.",
+      "weight": 3
+    },
+    {
+      "text": "States that the server responds with a SYN-ACK packet, acknowledging the client's SYN and sending its own ISN.",
+      "weight": 3
+    },
+    {
+      "text": "States that the client completes the handshake by sending an ACK packet to acknowledge the server's SYN segment.",
+      "weight": 3
+    },
+    {
+      "text": "Explains that sequence and acknowledgment numbers are incremented by one during SYN/ACK flag exchanges to acknowledge control signals.",
+      "weight": 2
+    },
+    {
+      "text": "Explains that Initial Sequence Numbers (ISNs) are chosen pseudo-randomly for security reasons rather than fixed at zero.",
+      "weight": 2
+    },
+    {
+      "text": "Clarifies that the handshake establishes bidirectional state, enabling independent full-duplex data flow control and error tracking.",
+      "weight": 2
+    },
+    {
+      "text": "Mentions that TCP options (such as Maximum Segment Size or Window Scaling) are negotiated within the SYN and SYN-ACK header fields.",
+      "weight": 1
+    }
+  ]
+}
