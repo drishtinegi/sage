@@ -1,3 +1,5 @@
+from typing import Literal
+
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -34,3 +36,15 @@ class TopicOut(BaseModel):
     title: str
     rubric_count: int
     status: str = "ready"
+
+class ItemEval(BaseModel):
+    item: int                      # rubric item number, starting at 1
+    status: Literal["covered", "partial", "missing", "wrong"]
+    evidence: str = ""             # exact words from the student ("" if missing)
+    note: str = ""                 # one short reason
+
+
+class EvalResult(BaseModel):
+    items: list[ItemEval]
+    target_item: int | None = None  # the most important gap to ask about next
+    target_reason: str = ""

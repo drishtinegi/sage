@@ -1,10 +1,11 @@
 import os
 import time
 from pathlib import Path
+
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-from google.genai.errors import ServerError, ClientError
+from google.genai.errors import ClientError, ServerError
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=True)
 
@@ -12,11 +13,16 @@ API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ["GOOGLE_API_KEY"]
 client = genai.Client(api_key=API_KEY)
 
 
-def generate(prompt: str, model_env: str = "LLM_MODEL_STRONG", json_mode: bool = True) -> str:
+def generate(
+    prompt: str,
+    model_env: str = "LLM_MODEL_STRONG",
+    json_mode: bool = True,
+    temperature: float | None = None,
+) -> str:
     config = types.GenerateContentConfig(
         response_mime_type="application/json" if json_mode else None,
+        temperature=temperature,
     )
-    # try the requested model, then the fallback model if there is one
     models = [os.environ[model_env]]
     fallback = os.environ.get("LLM_MODEL_FALLBACK")
     if fallback and fallback not in models:
@@ -32,7 +38,7 @@ def generate(prompt: str, model_env: str = "LLM_MODEL_STRONG", json_mode: bool =
                 return resp.text
             except ServerError as e:
                 last_error = e
-                wait = 2 ** attempt * 2  # 2, 4, 8, 16 seconds
+                wait = 2 ** attempt * 2
                 print(f"[{model}] {e.code} busy, retrying in {wait}s...")
                 time.sleep(wait)
             except ClientError as e:
