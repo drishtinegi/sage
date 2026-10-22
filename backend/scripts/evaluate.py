@@ -51,6 +51,9 @@ def check_result(result: EvalResult, n_items: int, explanation: str) -> None:
             raise ValueError(f"target_item must be one of the uncovered items {not_covered}")
     elif result.target_item is not None:
         raise ValueError("all items covered, so target_item must be null")
+    
+    if result.target_item is not None and not result.target_focus.strip():
+        raise ValueError("target_item is set, so target_focus must not be empty")
 
 
 def evaluate(brief: TopicBrief, explanation: str, attempts: int = 3) -> EvalResult:

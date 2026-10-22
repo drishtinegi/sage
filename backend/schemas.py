@@ -48,3 +48,10 @@ class EvalResult(BaseModel):
     items: list[ItemEval]
     target_item: int | None = None  # the most important gap to ask about next
     target_reason: str = ""
+
+
+class EvalResult(BaseModel):
+    items: list[ItemEval]
+    target_item: int | None = None
+    target_reason: str = ""
+    target_focus: str = ""   # neutral area for the beginner to ask about

@@ -1,0 +1,83 @@
+import re
+from pathlib import Path
+
+from llm import generate
+from schemas import TopicBrief
+
+PROMPT_FILE = Path(__file__).resolve().parent.parent / "prompts" / "persona.md"
+
+WORD = re.compile(r"[a-z]{5,}")
+
+# everyday words that are fine in a beginner's question (extend as false alarms appear)
+COMMON = {
+    "about", "after", "again", "always", "because", "before", "being", "could", "does",
+    "doing", "every", "explain", "explains", "first", "happens", "happen", "other",
+    "right", "should", "still", "their", "there", "these", "thing", "things", "think",
+    "those", "through", "under", "using", "where", "which", "while", "would", "works",
+    "work", "means", "makes", "called", "simple", "exactly", "different", "understand",
+    "basically", "confused", "wondering", "actually", "really", "never", "something",
+    "anything", "example", "states", "describes", "defines", "mean", "stuff",
+}
+
+
+def _words(s: str) -> set[str]:
+    return set(WORD.findall(s.lower()))
+
+
+def _tokens(s: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+", s.lower())
+
+
+def _ngrams(tokens: list[str], n: int = 4) -> set[str]:
+    return {" ".join(tokens[i : i + n]) for i in range(len(tokens) - n + 1)}
+
+
+def leak_problems(question, brief: TopicBrief, student_text, title, earlier) -> list[str]:
+    problems = []
+    q = question.strip()
+    if q.count("?") != 1 or not q.endswith("?"):
+        problems.append("must be exactly one question ending with a question mark")
+    if len(q.split()) > 40:
+        problems.append("too long, keep it under 35 words")
+
+    key_texts = [i.text for i in brief.rubric] + brief.misconceptions
+    q_grams = _ngrams(_tokens(q))
+    if any(q_grams & _ngrams(_tokens(t)) for t in key_texts):
+        problems.append("copies wording from the answer key")
+
+    vocab = set()
+    for t in key_texts:
+        vocab |= _words(t)
+    allowed = _words(student_text) | _words(title) | _words(" ".join(earlier))
+    leaked = sorted((_words(q) & vocab) - allowed - COMMON)
+    if leaked:
+        problems.append(f"uses terms the student never said: {', '.join(leaked)}")
+    return problems
+
+
+def ask_beginner(brief, title, student_turns, beginner_turns, focus, attempts=3):
+    """Returns (question, problems). problems is [] when the question passed the leak check."""
+    dialogue = []
+    for i, s in enumerate(student_turns):
+        dialogue.append(f"Student: {s}")
+        if i < len(beginner_turns):
+            dialogue.append(f"Beginner: {beginner_turns[i]}")
+
+    base = (
+        PROMPT_FILE.read_text(encoding="utf-8")
+        .replace("<<TOPIC>>", title)
+        .replace("<<DIALOGUE>>", "\n".join(dialogue))
+        .replace("<<FOCUS>>", focus)
+    )
+    student_text = "\n".join(student_turns)
+    last, question, problems = None, "", []
+    for _ in range(attempts):
+        content = base
+        if last:
+            content += f"\n\nYour previous question was rejected: {last}\nWrite a new one."
+        question = generate(content, "LLM_MODEL_CHEAP", json_mode=False, temperature=0.7).strip().strip('"')
+        problems = leak_problems(question, brief, student_text, title, beginner_turns)
+        if not problems:
+            return question, []
+        last = "; ".join(problems)
+    return question, problems
