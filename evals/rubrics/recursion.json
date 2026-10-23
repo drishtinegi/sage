@@ -2,58 +2,57 @@
   "title": "Recursion",
   "concept_map": {
     "key_ideas": [
-      "Base Case",
-      "Recursive Step",
-      "Call Stack and Stack Frames",
-      "Stack Unwinding",
-      "Stack Overflow",
-      "Tail Recursion"
+      "Recursive definition",
+      "Base case",
+      "Recursive step",
+      "Call stack",
+      "Stack overflow",
+      "Tail recursion"
     ],
     "prerequisites": [
-      "Functions and Parameter Passing",
-      "Control Flow (Conditionals)",
-      "Call Stack Concept",
-      "Variable Scope"
+      "Functions and parameters",
+      "Return values",
+      "Call stack mechanics",
+      "Conditional statements"
     ]
   },
   "misconceptions": [
-    "A recursive function runs faster and uses less memory than an equivalent iterative loop.",
-    "When a recursive function calls itself, it reuses and overwrites the exact same local variables in memory.",
-    "The return value from the base case automatically jumps back to the original outer caller without unwinding through intermediate function calls.",
-    "Infinite recursion will run forever in a loop without causing a program crash.",
-    "A base case is optional if the function uses a conditional loop to stop executing."
+    "A recursive function executes all recursive calls simultaneously in parallel.",
+    "A base case is optional if the recursive call terminates on its own.",
+    "Recursion can solve computational problems that iteration is theoretically unable to compute.",
+    "Recursive calls overwrite the existing local variables of the caller in memory."
   ],
   "rubric": [
     {
-      "text": "Defines recursion as a method where a function calls itself directly or indirectly to solve a larger problem by breaking it into smaller instances.",
+      "text": "Defines recursion as a technique where a function calls itself directly or indirectly.",
       "weight": 3
     },
     {
-      "text": "Explains that every valid recursive function requires at least one base case that produces a result without making further recursive calls.",
+      "text": "States that a recursive function requires at least one base case.",
       "weight": 3
     },
     {
-      "text": "Explains that the recursive step must modify input arguments to bring subsequent subproblems strictly closer to a base case.",
+      "text": "Explains that the base case returns a result without making further recursive calls.",
       "weight": 3
     },
     {
-      "text": "Describes how each recursive call pushes a new stack frame onto the execution call stack to maintain distinct local variables and execution state.",
+      "text": "States that each recursive call must operate on a strictly smaller subproblem.",
+      "weight": 3
+    },
+    {
+      "text": "Explains that each recursive call pushes an independent stack frame onto the call stack.",
       "weight": 2
     },
     {
-      "text": "Explains the unwinding phase, where control and return values flow backward through the stack frame instances after hitting a base case.",
+      "text": "States that an absent or unreachable base case triggers a stack overflow error.",
       "weight": 2
     },
     {
-      "text": "Identifies stack overflow as a runtime error caused by exceeding memory limits when recursive calls continue infinitely or too deeply.",
-      "weight": 2
-    },
-    {
-      "text": "Compares time and space complexity of recursive solutions against iterative alternatives, noting memory overhead from stack frames.",
+      "text": "Explains that any recursive algorithm can be rewritten iteratively.",
       "weight": 1
     },
     {
-      "text": "Explains tail recursion as a special form where the recursive call is the final operation, enabling tail-call optimization by reusing stack frames.",
+      "text": "Explains that tail call optimization allows compilers to reuse the current stack frame.",
       "weight": 1
     }
   ]

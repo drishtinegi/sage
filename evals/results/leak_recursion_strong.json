@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "Recursion is a programming technique where a function calls itself",
+      "note": "The student correctly defines recursion as a function calling itself."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "Every recursive solution requires at least one base case",
+      "note": "The student states that a recursive function requires at least one base case."
+    },
+    {
+      "item": 3,
+      "status": "partial",
+      "evidence": "to stop the process",
+      "note": "The student mentions stopping the process but does not clearly explain that the base case returns a result without making further recursive calls."
+    },
+    {
+      "item": 4,
+      "status": "covered",
+      "evidence": "to solve smaller instances of the same problem",
+      "note": "The student explains that recursive calls operate on smaller instances of the problem."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "Each function call gets its own separate set of local variables and parameters pushed onto the call stack",
+      "note": "The student explains that each call pushes an independent set of variables onto the call stack."
+    },
+    {
+      "item": 6,
+      "status": "partial",
+      "evidence": "prevent infinite loops",
+      "note": "The student mentions preventing infinite loops but does not specifically state that an absent or unreachable base case triggers a stack overflow error."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention that any recursive algorithm can be rewritten iteratively."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention tail call optimization."
+    }
+  ],
+  "target_item": 7,
+  "target_reason": "Understanding that recursion and iteration are computationally equivalent is important for choosing the right approach.",
+  "target_focus": "whether this technique can be written without recursion"
+}

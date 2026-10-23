@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "partial",
+      "evidence": "Process scheduling is all about organizing how our programs get CPU time.",
+      "note": "The student mentions organizing CPU time but does not mention the ready queue."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention non-preemptive scheduling."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention preemptive scheduling."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention CPU bursts and I/O waits."
+    },
+    {
+      "item": 5,
+      "status": "partial",
+      "evidence": "First-Come First-Served scheduling",
+      "note": "The student names the scheduling type but fails to explain that it runs processes purely in arrival order."
+    },
+    {
+      "item": 6,
+      "status": "wrong",
+      "evidence": "First-Come First-Served scheduling is that it always guarantees the fastest average response time",
+      "note": "The student states a known misconception that FCFS guarantees the fastest average response time."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain Shortest Job First scheduling."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not define starvation."
+    },
+    {
+      "item": 9,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain aging."
+    }
+  ],
+  "target_item": 1,
+  "target_reason": "Defining process scheduling and the ready queue is foundational to understanding how the system allocates CPU time.",
+  "target_focus": "where programs wait before getting CPU time"
+}

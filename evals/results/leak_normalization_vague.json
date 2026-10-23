@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "partial",
+      "evidence": "Database normalization is basically the process of organizing your data",
+      "note": "The student mentions organizing data but fails to explain it as a process for reducing data redundancy."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention modification anomalies."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention First Normal Form or atomic values."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention functional dependencies."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention Second Normal Form."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention Third Normal Form."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not discuss how higher normal forms affect read performance."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention denormalization."
+    }
+  ],
+  "target_item": 1,
+  "target_reason": "Item 1 is the most foundational definition of the core topic and has the highest weight along with item 2, but is only partially addressed.",
+  "target_focus": "what specific problem normalization aims to reduce in the data"
+}

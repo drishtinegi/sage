@@ -1,0 +1,2 @@
+Recursion is basically a function that repeats itself. It's like a loop but different.
+It is used a lot in programming and it can be confusing sometimes.

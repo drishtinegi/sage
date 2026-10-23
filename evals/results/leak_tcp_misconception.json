@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention establishing a reliable connection prior to data exchange."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "the client sends a SYN packet",
+      "note": "The student correctly states the client initiates the handshake with a SYN packet."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention that the sequence number is pseudo-random rather than zero."
+    },
+    {
+      "item": 4,
+      "status": "wrong",
+      "evidence": "carries the initial application payload data",
+      "note": "The student incorrectly claims the initial SYN packet carries application payload data."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "the server replies with a SYN-ACK",
+      "note": "The student correctly states the server responds with both SYN and ACK flags."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain how the server acknowledgment number is calculated."
+    },
+    {
+      "item": 7,
+      "status": "covered",
+      "evidence": "finally the client sends an ACK",
+      "note": "The student states the client concludes the procedure with an ACK packet."
+    },
+    {
+      "item": 8,
+      "status": "wrong",
+      "evidence": "that final ACK packet actually requires an explicit acknowledgment back from the server",
+      "note": "The student holds the misconception that the final ACK requires an explicit acknowledgment."
+    }
+  ],
+  "target_item": 1,
+  "target_reason": "Item 1 has the highest weight among missed items and is foundational for understanding the handshake.",
+  "target_focus": "what the connection needs before data exchange happens"
+}

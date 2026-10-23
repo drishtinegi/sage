@@ -1,0 +1,11 @@
+Recursion is when a function calls itself to solve a smaller version of the same problem.
+For example, factorial of n is n times factorial of n minus 1.
+Every recursive function needs a base case, which is the condition where it stops calling itself
+and returns a value directly. For factorial, the base case is factorial of 0 equals 1.
+The recursive step has to change the argument, like n minus 1, so each call gets closer to the base case.
+Each call is pushed as a new stack frame on the call stack, holding its own parameters and local variables.
+When the base case is reached, the calls return one by one and the stack unwinds, and each caller
+uses the returned value to finish its own calculation.
+If there is no base case, or it is never reached, the frames keep piling up until the stack runs
+out of space and the program crashes with a stack overflow.
+Recursion can be easier to read than a loop, but it uses more memory because of the stack frames.

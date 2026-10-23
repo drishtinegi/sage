@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "Recursion happens when a function calls itself inside its own body",
+      "note": "The student correctly defined recursion as a function calling itself."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "you always need a base case",
+      "note": "The student stated that a recursive function requires a base case."
+    },
+    {
+      "item": 3,
+      "status": "covered",
+      "evidence": "so the function knows when to finally stop calling itself and return a value",
+      "note": "The student explained that the base case stops further calls and returns a value."
+    },
+    {
+      "item": 4,
+      "status": "partial",
+      "evidence": "break down a large problem into smaller subproblems",
+      "note": "The student mentioned smaller subproblems but did not state that each recursive call must operate on a strictly smaller subproblem."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention call stack frames."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention stack overflow errors."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not discuss rewriting recursion iteratively."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention tail call optimization."
+    }
+  ],
+  "target_item": 4,
+  "target_reason": "Understanding how problems shrink on each call is essential for preventing infinite loops.",
+  "target_focus": "how the problems get smaller with each call"
+}

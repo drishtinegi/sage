@@ -1,0 +1,1 @@
+Recursion happens when a function calls itself inside its own body to break down a large problem into smaller subproblems. To make it work, you always need a base case so the function knows when to finally stop calling itself and return a value instead of going on forever.

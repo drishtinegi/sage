@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "partial",
+      "evidence": "pointers hold memory locations",
+      "note": "The student mentions holding memory locations but does not explicitly define a pointer as a variable storing a memory address."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention the address-of operator."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain dereferencing."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not discuss uninitialized pointers."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention pointer arithmetic."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not define a NULL pointer."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain pass-by-reference behavior."
+    }
+  ],
+  "target_item": 1,
+  "target_reason": "Defining what a pointer is fundamentally forms the foundation for all other pointer concepts.",
+  "target_focus": "what a pointer actually is"
+}

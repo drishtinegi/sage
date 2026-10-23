@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "recursion is basically when your code calls itself",
+      "note": "The student correctly defined recursion as a function calling itself."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "you need a base case",
+      "note": "The student stated that a recursive function requires a base case."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain that the base case returns a result without further calls."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention that each call operates on a strictly smaller subproblem."
+    },
+    {
+      "item": 5,
+      "status": "partial",
+      "evidence": "it pushes a new frame",
+      "note": "The student mentions a new frame is pushed, but contradicts it with misconceptions about parallel execution and overwriting."
+    },
+    {
+      "item": 6,
+      "status": "covered",
+      "evidence": "sometimes people forget and it overflows the stack",
+      "note": "The student correctly noted that an absent base case triggers a stack overflow."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not discuss rewriting recursion iteratively."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention tail call optimization."
+    }
+  ],
+  "target_item": 3,
+  "target_reason": "Understanding what the base case does is essential to stop the recursion from running infinitely.",
+  "target_focus": "what happens when the base case is reached"
+}

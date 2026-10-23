@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "partial",
+      "evidence": "Process scheduling is the OS method of allocating CPU time to various processes",
+      "note": "It mentions allocating CPU time but leaves out the ready queue."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention non-preemptive scheduling."
+    },
+    {
+      "item": 3,
+      "status": "covered",
+      "evidence": "Preemptive algorithms can pause a running process to give others a turn",
+      "note": "The student correctly explained that preemptive scheduling allows interrupting a running process."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not describe alternating CPU bursts and I/O waits."
+    },
+    {
+      "item": 5,
+      "status": "partial",
+      "evidence": "algorithms like FCFS",
+      "note": "The student names FCFS without explaining that it runs processes in arrival order."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention the convoy effect."
+    },
+    {
+      "item": 7,
+      "status": "partial",
+      "evidence": "SJF",
+      "note": "The student names SJF without explaining how it selects processes based on CPU burst."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not define starvation."
+    },
+    {
+      "item": 9,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain aging."
+    }
+  ],
+  "target_item": 2,
+  "target_reason": "Understanding non-preemptive scheduling is essential for contrasting how different algorithms manage CPU control.",
+  "target_focus": "what happens when a process does not voluntarily give up control"
+}

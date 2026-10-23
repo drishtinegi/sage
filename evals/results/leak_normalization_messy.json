@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "normalization is basically cleaning up your database tables so you don't repeat the same info over and over",
+      "note": "The student correctly defines normalization as a process for reducing data repetition."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "which is great because it stops update anomalies and stuff",
+      "note": "The student explains that normalization helps prevent modification anomalies."
+    },
+    {
+      "item": 3,
+      "status": "covered",
+      "evidence": "First you gotta make sure everything is atomic",
+      "note": "The student states that First Normal Form requires atomic values."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention functional dependencies at all."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not discuss Second Normal Form or partial functional dependencies."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not discuss Third Normal Form or transitive functional dependencies."
+    },
+    {
+      "item": 7,
+      "status": "covered",
+      "evidence": "But wait, sometimes you need joins which slow things down",
+      "note": "The student correctly explains that additional joins can decrease read performance."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention denormalization as an optimization technique."
+    }
+  ],
+  "target_item": 4,
+  "target_reason": "Defining functional dependency is essential because higher normal forms are built directly on eliminating specific types of these dependencies.",
+  "target_focus": "how one piece of data determines another"
+}

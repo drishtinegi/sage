@@ -1,0 +1,1 @@
+When two computers want to connect, the client sends a SYN packet that carries the initial application payload data along with the sequence number. Then the server replies with a SYN-ACK, and finally the client sends an ACK. But remember, that final ACK packet actually requires an explicit acknowledgment back from the server before the connection is fully established.

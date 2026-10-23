@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "Recursion is when a function calls itself.",
+      "note": "The student correctly defines recursion as a function calling itself."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention a base case or termination condition anywhere."
+    },
+    {
+      "item": 3,
+      "status": "partial",
+      "evidence": "The function keeps calling itself with a smaller number.",
+      "note": "The student mentions changing the argument, but does not explain that this ensures progress toward a base case."
+    },
+    {
+      "item": 4,
+      "status": "wrong",
+      "evidence": "all the calls share the same stack frame and the same local variables",
+      "note": "The student holds the misconception that recursive calls share a single stack frame and variables."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student fails to explain stack unwinding or how return values pass back through frames."
+    },
+    {
+      "item": 6,
+      "status": "wrong",
+      "evidence": "it is always faster than using a loop",
+      "note": "The student incorrectly claims recursion is always faster than a loop, holding a known misconception."
+    }
+  ],
+  "target_item": 2,
+  "target_reason": "Introducing a base case is critical to prevent infinite recursion and forms the foundation of all recursive problem-solving."
+}

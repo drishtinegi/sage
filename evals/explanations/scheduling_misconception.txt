@@ -1,0 +1,1 @@
+Process scheduling is all about organizing how our programs get CPU time. A really nice thing about First-Come First-Served scheduling is that it always guarantees the fastest average response time since nobody has to wait around while smaller jobs jump the line. It keeps everything super simple and fair for every single process that enters the queue.

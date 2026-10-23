@@ -10,10 +10,11 @@ PROMPT_FILE = Path(__file__).resolve().parent.parent / "prompts" / "brief.md"
 
 
 def extract_json(raw: str) -> dict:
-    start, end = raw.find("{"), raw.rfind("}")
-    if start == -1 or end == -1:
+    start = raw.find("{")
+    if start == -1:
         raise ValueError("no JSON object found in model output")
-    return json.loads(raw[start : end + 1])
+    obj, _ = json.JSONDecoder().raw_decode(raw[start:])
+    return obj
 
 
 def make_brief(title: str, notes: str = "", attempts: int = 2) -> TopicBrief:

@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "normalization is the process of breaking down tables to reduce repetition",
+      "note": "The student correctly defines normalization as a process to reduce data repetition."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention modification anomalies or how normalization prevents them."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention First Normal Form or atomic values."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not define functional dependencies."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention Second Normal Form or partial functional dependencies."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention Third Normal Form or transitive functional dependencies."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not discuss how higher normal forms affect read performance or joins."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention denormalization."
+    }
+  ],
+  "target_item": 2,
+  "target_reason": "Understanding modification anomalies explains the practical problems that normalization is designed to solve.",
+  "target_focus": "what specific data update problems happen if tables are not broken down"
+}

@@ -1,0 +1,4 @@
+Recursion is when a function calls itself. It is a nice way to write code for things like
+factorial. When a function calls itself, all the calls share the same stack frame and the same
+local variables, so the memory use stays small and it is always faster than using a loop.
+The function keeps calling itself with a smaller number.

@@ -1,0 +1,1 @@
+Process scheduling is basically how the operating system handles tasks and stuff. It makes sure everything runs smoothly on the computer without any major issues. The system has to figure out what goes first and what goes next so the user doesn't get frustrated waiting. It uses some cool algorithms behind the scenes to manage all the active programs efficiently.

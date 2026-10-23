@@ -1,0 +1,70 @@
+{
+  "topic": "recursion",
+  "ended_by": "all items covered",
+  "score": 100.0,
+  "turns": [
+    {
+      "turn": 1,
+      "student": "Recursion is a programming technique where a function calls itself to solve a problem. It breaks a big problem into smaller problems of the same type.",
+      "beginner": "Wait, if the function calls itself, how does it know when to stop?",
+      "target_item": 2,
+      "focus": "how the function knows when to stop",
+      "leak_problems": [],
+      "seconds": 54.9
+    },
+    {
+      "turn": 2,
+      "student": "A recursive function stops when it reaches a base case. The base case is a condition that tells the function when to stop calling itself. For example, in factorial, when the number becomes 1, the function can return 1.",
+      "beginner": "Wait, how does the function actually make the big problem smaller on each call?",
+      "target_item": 4,
+      "focus": "how the problems become smaller on each call",
+      "leak_problems": [],
+      "seconds": 25.9
+    },
+    {
+      "turn": 3,
+      "student": "The function makes the problem smaller by passing a smaller value to itself. For example, factorial(5) calls factorial(5 - 1), which becomes factorial(4). It keeps doing this until it reaches the base case.",
+      "beginner": "Wait, where does the computer keep track of all those smaller calls while it is doing them?",
+      "target_item": 5,
+      "focus": "what happens in memory when a function calls itself",
+      "leak_problems": [],
+      "seconds": 33.9
+    },
+    {
+      "turn": 4,
+      "student": "The computer keeps track of recursive calls using a memory structure called the call stack. Each call has its own parameters and local variables. When one call finishes, the computer returns to the previous call and continues its work.",
+      "beginner": "Wait, what happens if the function never reaches the base case and keeps calling itself forever?",
+      "target_item": 6,
+      "focus": "what happens if the function never stops calling itself",
+      "leak_problems": [],
+      "seconds": 28.4
+    },
+    {
+      "turn": 5,
+      "student": "If a recursive function never reaches its base case, it keeps making new function calls until the call stack runs out of space. This usually causes a stack overflow error, and the program may crash. To prevent this, we need a correct base case and make sure each call moves toward it.",
+      "beginner": "Wait, if we can solve it this way, can we also just use a normal loop to do the same thing instead?",
+      "target_item": 7,
+      "focus": "how to write this without using recursion",
+      "leak_problems": [],
+      "seconds": 29.7
+    },
+    {
+      "turn": 6,
+      "student": "Yes, we can often solve the same problem using a normal loop instead of recursion. For example, we can calculate factorial by starting with 1 and multiplying it by each number from 1 to n using a loop. Recursion uses function calls, while a loop repeats a block of code.",
+      "beginner": "Wait, if the computer makes a new space on the call stack for each call, how does it know to go back to the previous one when it finishes?",
+      "target_item": 8,
+      "focus": "how compilers can reuse the current stack frame",
+      "leak_problems": [],
+      "seconds": 36.7
+    },
+    {
+      "turn": 7,
+      "student": "The call stack works like a stack of plates. When a function calls another function, its information stays on the stack while it waits. When the new function finishes, its stack frame is removed, and the computer uses the saved information to return to the previous function and continue from where it stopped.",
+      "beginner": "Wait, does the computer ever change how it uses that stack of plates if the function calls itself at the very end?",
+      "target_item": 8,
+      "focus": "how compilers optimize stack memory for certain recursive calls",
+      "leak_problems": [],
+      "seconds": 39.2
+    }
+  ]
+}

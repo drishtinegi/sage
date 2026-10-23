@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "partial",
+      "evidence": "Process scheduling is how the OS decides which process gets the CPU at any given time.",
+      "note": "The student explains the basic concept but fails to mention the ready queue."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention non-preemptive scheduling."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention preemptive scheduling."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain alternating CPU bursts and I/O waits."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "First-Come First-Served where jobs are handled strictly in the order they arrive in the ready queue.",
+      "note": "The student correctly describes FCFS as running processes in arrival order."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention the convoy effect or its impact on wait time."
+    },
+    {
+      "item": 7,
+      "status": "wrong",
+      "evidence": "Shortest Job First, which picks the process with the smallest total execution time",
+      "note": "The student incorrectly states it uses total execution time instead of the upcoming CPU burst."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not define starvation."
+    },
+    {
+      "item": 9,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention aging."
+    }
+  ],
+  "target_item": 7,
+  "target_reason": "Correcting the misunderstanding about how Shortest Job First measures process length is crucial for accurate scheduling behavior.",
+  "target_focus": "how the system measures the length of the next process"
+}

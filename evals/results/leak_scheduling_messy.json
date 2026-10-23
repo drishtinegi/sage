@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "process scheduling is basically the OS juggling all our open apps and giving them tiny slices of CPU time",
+      "note": "The student correctly describes allocating CPU time to processes."
+    },
+    {
+      "item": 2,
+      "status": "wrong",
+      "evidence": "lower ones might wait a bit, but usually they still run to completion without interruption once they finally start",
+      "note": "The student incorrectly states that processes run to completion without interruption."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention preemptive scheduling or OS interruption."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention alternating CPU bursts and I/O waits."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain First-Come First-Served scheduling."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention the convoy effect."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain Shortest Job First scheduling."
+    },
+    {
+      "item": 8,
+      "status": "wrong",
+      "evidence": "Priority scheduling completely prevents process starvation",
+      "note": "The student holds the misconception that priority scheduling completely prevents starvation."
+    },
+    {
+      "item": 9,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention aging as a mechanism to prevent starvation."
+    }
+  ],
+  "target_item": 3,
+  "target_reason": "Item 3 is a high weight foundational concept that the student has not yet covered.",
+  "target_focus": "what happens when another task needs to interrupt the current one"
+}

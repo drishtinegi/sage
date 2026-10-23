@@ -24,6 +24,8 @@ Rules:
   should know first).
 - Every misconception must be addressed by at least one rubric item.
 - Write complete, correctly spaced English words.
+-Write complete, correctly spaced English words. Put a space between every pair of words.
+- Each rubric item must test exactly one idea. Never join two ideas with "and" or a comma.
 
 Return ONLY valid JSON, with no markdown fences and no commentary, in this shape:
 

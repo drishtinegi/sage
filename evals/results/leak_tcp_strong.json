@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "The TCP three-way handshake establishes a reliable connection...Once this exchange completes, both sides can reliably transmit data.",
+      "note": "The student identifies the handshake's goal of setting up a reliable connection before data transfer."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "First, the client sends a SYN packet",
+      "note": "The student states that the client initiates the process by sending a SYN packet."
+    },
+    {
+      "item": 3,
+      "status": "partial",
+      "evidence": "with a random initial sequence number",
+      "note": "The student mentions using a random initial sequence number but does not contrast it with starting at zero."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not state that the first SYN packet carries no application data."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "The server responds with a SYN-ACK packet",
+      "note": "The student correctly describes the server responding with a packet containing both flags."
+    },
+    {
+      "item": 6,
+      "status": "partial",
+      "evidence": "acknowledging the client's sequence number",
+      "note": "The student mentions acknowledging the number but omits that it is incremented by one."
+    },
+    {
+      "item": 7,
+      "status": "covered",
+      "evidence": "Finally, the client sends an ACK packet to acknowledge the server's sequence number.",
+      "note": "The student states that the client finishes the handshake by sending an ACK packet."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain why three messages are required to confirm two-way communication."
+    }
+  ],
+  "target_item": 8,
+  "target_reason": "Explaining why three messages are needed clarifies the underlying mechanism ensuring bidirectional reliability.",
+  "target_focus": "why three messages are needed instead of two"
+}

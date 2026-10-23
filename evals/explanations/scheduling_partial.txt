@@ -1,0 +1,1 @@
+Process scheduling is how the OS decides which process gets the CPU at any given time. We have algorithms like First-Come First-Served where jobs are handled strictly in the order they arrive in the ready queue. Then there is Shortest Job First, which picks the process with the smallest total execution time next to improve efficiency.

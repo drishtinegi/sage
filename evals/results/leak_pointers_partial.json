@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "Pointers in C are variables that store memory addresses",
+      "note": "The student correctly defines a pointer as a variable storing a memory address."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "you use the address-of operator, which is the ampersand, to grab the memory location of an existing variable",
+      "note": "The student explains that the address-of operator retrieves a variable's memory location."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention dereferencing a pointer to access its value."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not discuss uninitialized pointers or garbage addresses."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain pointer arithmetic."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention NULL pointers."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain pass-by-reference behavior."
+    }
+  ],
+  "target_item": 3,
+  "target_reason": "Understanding how to access the value stored at a memory address is the immediate next step after learning how to store and assign addresses.",
+  "target_focus": "how to access the value stored at that address"
+}

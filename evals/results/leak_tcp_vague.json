@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "establishes a connection using three distinct steps to make sure both sides are ready",
+      "note": "The student explained that the handshake establishes a connection before sending data."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention the client initiating the handshake with a SYN packet."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not discuss initial sequence numbers or how they are generated."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not clarify whether the initial packet carries payload data."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention the server responding with a packet carrying SYN and ACK flags."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain how the acknowledgment number is calculated by the server."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention the client concluding the handshake with an ACK packet."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain why three distinct messages are mathematically required."
+    }
+  ],
+  "target_item": 2,
+  "target_reason": "Item 2 is a high weight foundational step about how the client starts the connection process.",
+  "target_focus": "how the client starts the connection process"
+}

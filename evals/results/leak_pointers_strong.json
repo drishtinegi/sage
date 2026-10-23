@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "Pointers in C are variables that store the memory addresses of other variables.",
+      "note": "The student correctly defines a pointer as a variable storing a memory address."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "You can initialize a pointer using the address-of operator to reference an existing variable.",
+      "note": "The student explains that the address-of operator retrieves a variable's location."
+    },
+    {
+      "item": 3,
+      "status": "covered",
+      "evidence": "To access or modify the value stored at that memory location, you use the dereference operator.",
+      "note": "The student explains that dereferencing accesses the value at the stored address."
+    },
+    {
+      "item": 4,
+      "status": "partial",
+      "evidence": "Declaring a pointer only creates the pointer variable itself; it does not allocate memory for the data it points to",
+      "note": "The student notes that memory is not automatically allocated for the data, but misses mentioning garbage addresses."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "Pointer arithmetic is also type-aware, meaning incrementing a pointer advances it by the size of its data type in bytes.",
+      "note": "The student correctly explains that pointer arithmetic scales by the byte size of the data type."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention NULL pointers at all."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not discuss pass-by-reference or function arguments."
+    }
+  ],
+  "target_item": 6,
+  "target_reason": "Understanding NULL pointers is essential for safely managing and checking pointer validity.",
+  "target_focus": "what a pointer contains when it does not point anywhere"
+}

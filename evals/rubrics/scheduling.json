@@ -2,58 +2,58 @@
   "title": "Process Scheduling",
   "concept_map": {
     "key_ideas": [
-      "Process States and Ready Queue",
       "Preemptive vs Non-preemptive Scheduling",
-      "Scheduling Criteria (Throughput, Turnaround, Waiting, Response Time)",
-      "Scheduling Algorithms (FCFS, SJF, Round Robin, Priority)",
-      "Context Switching and Dispatcher",
-      "Multilevel Feedback Queues"
+      "Scheduling Algorithms",
+      "Convoy Effect",
+      "Starvation and Aging"
     ],
     "prerequisites": [
-      "Concept of a Process and Process Control Block (PCB)",
-      "Process Lifecycle States (Ready, Running, Blocked)",
-      "CPU Bursts vs I/O Bursts",
-      "Basic Computer Architecture and Interrupts"
+      "Process States",
+      "Context Switching",
+      "Ready Queue"
     ]
   },
   "misconceptions": [
-    "Believing preemptive scheduling permanently terminates a running process when it is interrupted.",
-    "Assuming Shortest Job First (SJF) is straightforward to implement in real-world general-purpose operating systems without estimation.",
-    "Thinking a smaller time quantum in Round Robin scheduling always improves system throughput.",
-    "Confusing the role of the CPU scheduler (selecting a process) with the role of the dispatcher (executing the context switch).",
-    "Believing priority scheduling naturally prevents process starvation without explicit mechanisms like aging."
+    "A process always uses the CPU continuously until it completes its execution.",
+    "First-Come First-Served scheduling guarantees the fastest average response time.",
+    "Preemptive scheduling allows processes to run to completion without interruption.",
+    "Priority scheduling completely prevents process starvation."
   ],
   "rubric": [
     {
-      "text": "Explains that process scheduling is the operating system function that selects which runnable process in memory gets access to the CPU.",
+      "text": "Defines process scheduling as allocating CPU execution time to processes in the ready queue.",
       "weight": 3
     },
     {
-      "text": "Differentiates preemptive scheduling (where the OS can interrupt a running process) from non-preemptive scheduling (where a process runs until it yields, blocks, or terminates).",
+      "text": "Defines non-preemptive scheduling as allowing a process to retain the CPU until voluntary release.",
       "weight": 3
     },
     {
-      "text": "Defines key scheduling performance metrics including CPU utilization, throughput, turnaround time, waiting time, and response time.",
+      "text": "Defines preemptive scheduling as allowing the operating system to interrupt a running process.",
+      "weight": 3
+    },
+    {
+      "text": "Explains that process execution consists of alternating CPU bursts separated by I/O waits.",
       "weight": 2
     },
     {
-      "text": "Explains First-Come, First-Served (FCFS) scheduling and describes how the convoy effect occurs when short processes wait behind a long CPU-bound process.",
+      "text": "Describes First-Come First-Served scheduling as running processes purely in arrival order.",
       "weight": 2
     },
     {
-      "text": "Explains Shortest Job First (SJF) and Shortest Remaining Time First (SRTF) scheduling, noting why they minimize average waiting time and why exact burst times are difficult to predict.",
+      "text": "States that First-Come First-Served scheduling can cause a convoy effect that worsens average wait time.",
       "weight": 2
     },
     {
-      "text": "Explains Round Robin (RR) scheduling, including how the size of the time quantum impacts performance and context-switching overhead.",
+      "text": "Explains Shortest Job First scheduling as selecting the process with the smallest upcoming CPU burst.",
       "weight": 2
     },
     {
-      "text": "Describes Priority Scheduling, the issue of starvation for low-priority processes, and how aging solves starvation by gradually increasing a process's priority over time.",
+      "text": "Defines starvation as indefinite waiting experienced by low priority processes.",
       "weight": 2
     },
     {
-      "text": "Explains Multilevel Feedback Queue (MLFQ) scheduling and how it dynamically adjusts process priority based on historical behavior (such as CPU vs I/O bound behavior).",
+      "text": "Explains aging as a mechanism of increasing process priority over time to prevent starvation.",
       "weight": 1
     }
   ]

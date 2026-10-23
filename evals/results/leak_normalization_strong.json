@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "Database normalization is the systematic process of structuring relational tables to minimize data redundancy",
+      "note": "The student clearly defines normalization and its goal of reducing data redundancy."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "prevent anomalies like update, insert, and delete errors",
+      "note": "The student explains that normalization prevents modification anomalies."
+    },
+    {
+      "item": 3,
+      "status": "covered",
+      "evidence": "First Normal Form requires atomic values",
+      "note": "The student states that First Normal Form requires every column to contain atomic values."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not define what a functional dependency is."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "Second and Third Normal Forms remove partial and transitive dependencies respectively",
+      "note": "The student states that Second Normal Form eliminates partial functional dependencies."
+    },
+    {
+      "item": 6,
+      "status": "covered",
+      "evidence": "Second and Third Normal Forms remove partial and transitive dependencies respectively",
+      "note": "The student states that Third Normal Form eliminates transitive functional dependencies."
+    },
+    {
+      "item": 7,
+      "status": "covered",
+      "evidence": "it often requires more joins, so designers must balance it with query performance needs",
+      "note": "The student explains that higher normal forms can decrease read performance due to additional joins."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student mentions balancing performance and joins, but never explicitly states denormalization as a technique to optimize read speed."
+    }
+  ],
+  "target_item": 4,
+  "target_reason": "Understanding functional dependencies is foundational for grasping how and why normal forms are structured.",
+  "target_focus": "what a functional dependency is between attributes"
+}

@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "Recursion is when a function calls itself to solve a smaller version of the same problem.",
+      "note": "The student clearly defines recursion as a self-calling function solving smaller instances."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "Every recursive function needs a base case, which is the condition where it stops calling itself and returns a value directly.",
+      "note": "The student explains the necessity of a base case to terminate execution."
+    },
+    {
+      "item": 3,
+      "status": "covered",
+      "evidence": "The recursive step has to change the argument, like n minus 1, so each call gets closer to the base case.",
+      "note": "The student explains that arguments must be modified to make progress toward the base case."
+    },
+    {
+      "item": 4,
+      "status": "covered",
+      "evidence": "Each call is pushed as a new stack frame on the call stack, holding its own parameters and local variables.",
+      "note": "The student covers how each call allocates a new stack frame for its parameters and variables."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "When the base case is reached, the calls return one by one and the stack unwinds, and each caller uses the returned value to finish its own calculation.",
+      "note": "The student describes stack unwinding and how values pass back through the call frames."
+    },
+    {
+      "item": 6,
+      "status": "covered",
+      "evidence": "Recursion can be easier to read than a loop, but it uses more memory because of the stack frames.",
+      "note": "The student compares recursion to loops, highlighting the memory overhead of stack frames."
+    }
+  ],
+  "target_item": null,
+  "target_reason": "All rubric items have been fully covered by the student."
+}

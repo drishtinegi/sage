@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not define process scheduling as allocating CPU execution time to processes in the ready queue."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention non-preemptive scheduling."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention preemptive scheduling."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain CPU bursts and I/O waits."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention First-Come First-Served scheduling."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not discuss the convoy effect."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention Shortest Job First scheduling."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention starvation."
+    },
+    {
+      "item": 9,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention aging."
+    }
+  ],
+  "target_item": 1,
+  "target_reason": "Defining process scheduling is the foundational concept that all other scheduling topics build upon.",
+  "target_focus": "how the system decides which task gets handled first"
+}

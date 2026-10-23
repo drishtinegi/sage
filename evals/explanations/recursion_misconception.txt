@@ -1,0 +1,1 @@
+Recursion is super cool because a base case is optional if you know the recursive call will terminate on its own eventually. The function just calls itself over and over until the condition naturally resolves, and then all those parallel threads merge back together to give you the final answer.

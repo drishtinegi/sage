@@ -1,0 +1,1 @@
+So basically, the TCP three-way handshake is just how computers talk to each other on the internet before sending any real data. It is a super important networking concept that establishes a connection using three distinct steps to make sure both sides are ready. Without it, web browsing and apps just wouldn't work properly because everything needs to sync up first.

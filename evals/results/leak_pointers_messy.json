@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "pointers are basically just variables that hold memory addresses",
+      "note": "The student correctly defines a pointer as a variable storing a memory address."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "you use the ampersand to get the address of something",
+      "note": "The student correctly explains that the ampersand retrieves the memory location."
+    },
+    {
+      "item": 3,
+      "status": "covered",
+      "evidence": "then the star to dereference it",
+      "note": "The student correctly mentions using the star operator to dereference the pointer."
+    },
+    {
+      "item": 4,
+      "status": "wrong",
+      "evidence": "when you make a pointer, it automatically allocates memory for whatever type it is",
+      "note": "The student holds the misconception that declaring a pointer automatically allocates memory."
+    },
+    {
+      "item": 5,
+      "status": "wrong",
+      "evidence": "pointer arithmetic just adds one byte to the address every time you do plus plus",
+      "note": "The student states the misconception that pointer arithmetic always adds a fixed one byte."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention NULL pointers at all."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain pass-by-reference behavior in function arguments."
+    }
+  ],
+  "target_item": 4,
+  "target_reason": "Believing that declaring a pointer automatically allocates memory can lead to severe memory bugs and segmentation faults.",
+  "target_focus": "what happens to the memory when you create a pointer without allocating"
+}

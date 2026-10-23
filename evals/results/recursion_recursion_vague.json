@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "partial",
+      "evidence": "a function that repeats itself",
+      "note": "The student states that a function repeats itself but does not explain that it calls itself to solve smaller instances."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention a base case or how execution terminates."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain how recursive steps modify arguments to make progress."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention the call stack or frame allocation."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not describe stack unwinding or returning values through suspended call frames."
+    },
+    {
+      "item": 6,
+      "status": "partial",
+      "evidence": "It's like a loop but different",
+      "note": "The student compares recursion to a loop but does not discuss memory overhead or stack overflow errors."
+    }
+  ],
+  "target_item": 1,
+  "target_reason": "Defining recursion and how a function calls itself is the foundational concept that must be understood first."
+}

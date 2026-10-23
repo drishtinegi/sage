@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "wrong",
+      "evidence": "a pointer variable actually stores the value of another variable directly instead of its memory address",
+      "note": "The student states a known misconception that pointers store values directly instead of addresses."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain the address-of operator."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain dereferencing."
+    },
+    {
+      "item": 4,
+      "status": "wrong",
+      "evidence": "it automatically allocates memory for the data type it points to",
+      "note": "The student states a known misconception that declaring a pointer automatically allocates memory."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention pointer arithmetic."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not define a NULL pointer."
+    },
+    {
+      "item": 7,
+      "status": "partial",
+      "evidence": "pass things around in your functions without needing complicated syntax",
+      "note": "The student mentions passing things to functions but does not explain pass-by-reference mechanics."
+    }
+  ],
+  "target_item": 1,
+  "target_reason": "Defining what a pointer actually stores is the most foundational concept that must be corrected first.",
+  "target_focus": "what a pointer actually holds in memory"
+}

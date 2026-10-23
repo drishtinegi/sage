@@ -1,0 +1,1 @@
+Okay so the handshake is basically where a client sends a SYN to start things off and wait wait, initial sequence numbers always begin at zero for every connection, right? Oh wait no they are random. Anyway, you send a SYN, then the server sends back a SYN-ACK and then you just send an ACK back and then somehow you are connected and can send your files and stuff.

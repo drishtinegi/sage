@@ -1,0 +1,1 @@
+The three-way handshake starts when the client sends a SYN packet to the server to ask for a connection. The server gets this and replies with a SYN-ACK packet, which acknowledges the client's request and also sends its own synchronization signal. At this point, the client knows the server is listening and ready to talk.

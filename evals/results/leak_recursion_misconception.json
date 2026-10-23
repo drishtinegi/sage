@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "The function just calls itself over and over",
+      "note": "The student correctly explains that a function calls itself."
+    },
+    {
+      "item": 2,
+      "status": "wrong",
+      "evidence": "a base case is optional if you know the recursive call will terminate on its own eventually",
+      "note": "The student states that a base case is optional, which is a known misconception."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention how a base case returns a result without further calls."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student fails to explain that recursive calls must operate on a strictly smaller subproblem."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student makes no mention of stack frames or the call stack."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not address stack overflow errors caused by missing base cases."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention iterative rewrites."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not discuss tail call optimization."
+    }
+  ],
+  "target_item": 2,
+  "target_reason": "The student holds a misconception that the base case is optional.",
+  "target_focus": "why the function needs a base case to stop"
+}

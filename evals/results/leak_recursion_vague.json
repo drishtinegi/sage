@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "partial",
+      "evidence": "Recursion is basically a function that repeats itself.",
+      "note": "The student mentions a function repeating itself but does not explicitly explain that the function calls itself."
+    },
+    {
+      "item": 2,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention a base case."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention how a result is returned without further calls."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain that recursive calls operate on a smaller subproblem."
+    },
+    {
+      "item": 5,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention the call stack or stack frames."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not discuss stack overflow errors."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention rewriting recursion iteratively."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain tail call optimization."
+    }
+  ],
+  "target_item": 2,
+  "target_reason": "A base case is essential for preventing infinite repetition in recursion.",
+  "target_focus": "how the function knows when to stop repeating"
+}

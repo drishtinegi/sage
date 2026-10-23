@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "somehow you are connected and can send your files and stuff",
+      "note": "The student mentions establishing the connection before sending files."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "a client sends a SYN to start things off",
+      "note": "The student states that the client initiates with a SYN packet."
+    },
+    {
+      "item": 3,
+      "status": "covered",
+      "evidence": "Oh wait no they are random.",
+      "note": "The student corrects the misconception and notes that sequence numbers are random."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention whether the initial packet carries payload data."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "then the server sends back a SYN-ACK",
+      "note": "The student states the server replies with a SYN-ACK packet."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not mention how the acknowledgment number is calculated."
+    },
+    {
+      "item": 7,
+      "status": "covered",
+      "evidence": "and then you just send an ACK back",
+      "note": "The student explains that the client concludes with an ACK packet."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student does not explain why three messages are mathematically required."
+    }
+  ],
+  "target_item": 4,
+  "target_reason": "Clarifying whether the initial packet carries payload data is a foundational concept missing from the explanation.",
+  "target_focus": "what is inside the first message"
+}

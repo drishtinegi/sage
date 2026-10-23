@@ -3,63 +3,53 @@
   "concept_map": {
     "key_ideas": [
       "Memory addresses",
-      "Pointer variables",
-      "Address-of operator (&)",
-      "Dereference operator (*)",
-      "Null pointers",
+      "Dereferencing",
       "Pointer arithmetic",
-      "Pointers and arrays",
-      "Pass-by-reference simulation"
+      "Pass-by-reference",
+      "NULL pointers"
     ],
     "prerequisites": [
-      "Variables and data types",
-      "Memory layout basics",
-      "Function parameters and return values"
+      "Variables",
+      "Data types",
+      "Functions",
+      "Computer memory layout"
     ]
   },
   "misconceptions": [
-    "A pointer variable stores the actual value of another variable directly rather than its memory address.",
-    "Adding 1 to a pointer always increments the numerical address by exactly 1 byte regardless of the data type.",
-    "Uninitialized pointers automatically default to pointing to NULL or a safe memory address.",
-    "Array names and pointer variables are identical in all contexts, allowing array names to be reassigned to new addresses.",
-    "Dereferencing a pointer (*p) yields the address of the pointer itself."
+    "A pointer variable stores the value of another variable directly instead of its memory address.",
+    "Dereferencing a pointer using the asterisk operator changes the memory address stored in the pointer.",
+    "Declaring a pointer automatically allocates memory for the data type it points to.",
+    "Pointer arithmetic increments the memory address by a fixed number of bytes regardless of the underlying data type size.",
+    "A NULL pointer points to memory address zero which can be safely read or written to like any other address."
   ],
   "rubric": [
     {
-      "text": "Explains that a pointer is a variable that stores the memory address of another variable rather than a standard data value.",
+      "text": "Defines a pointer as a variable that stores a memory address.",
       "weight": 3
     },
     {
-      "text": "Demonstrates how the address-of operator (&) is used to obtain the memory address of a variable.",
+      "text": "Explains that the address-of operator retrieves the memory location of a variable.",
       "weight": 3
     },
     {
-      "text": "Explains how the dereference operator (*) accesses or modifies the value stored at the memory address held by a pointer.",
+      "text": "Explains that dereferencing a pointer accesses the value located at the stored memory address.",
       "weight": 3
     },
     {
-      "text": "Clarifies that a pointer's declared type determines the type of data it points to and governs how dereferencing and arithmetic behave.",
+      "text": "States that uninitialized pointers contain garbage addresses rather than automatically allocated memory.",
       "weight": 2
     },
     {
-      "text": "Explains the purpose of a NULL pointer as a sentinel value indicating that the pointer does not point to a valid memory location.",
+      "text": "Explains that pointer arithmetic scales additions by the byte size of the pointed data type.",
       "weight": 2
     },
     {
-      "text": "Explains how pointers enable pass-by-reference behavior in C functions, allowing a called function to modify the caller's variables.",
-      "weight": 3
-    },
-    {
-      "text": "Describes pointer arithmetic, specifically that adding or subtracting an integer scales the memory address by the size of the pointed-to data type.",
+      "text": "Defines a NULL pointer as a special value indicating that the pointer references no valid memory location.",
       "weight": 2
     },
     {
-      "text": "Explains the relationship between arrays and pointers, including how array names decay into pointers to their first elements in most expressions.",
+      "text": "Explains how pointers enable pass-by-reference behavior in function arguments to modify original variables.",
       "weight": 2
-    },
-    {
-      "text": "Explains how pointers are used with dynamic memory allocation functions (such as malloc and free) to manage heap memory.",
-      "weight": 1
     }
   ]
 }

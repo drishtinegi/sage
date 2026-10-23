@@ -16,13 +16,21 @@ COMMON = {
     "those", "through", "under", "using", "where", "which", "while", "would", "works",
     "work", "means", "makes", "called", "simple", "exactly", "different", "understand",
     "basically", "confused", "wondering", "actually", "really", "never", "something",
-    "anything", "example", "states", "describes", "defines", "mean", "stuff",
+    "anything", "example", "states", "describes", "defines", "mean", "stuff", "another",
+    "without", "another", "running", "run", "start",
 }
 
-
 def _words(s: str) -> set[str]:
-    return set(WORD.findall(s.lower()))
-
+    out = set()
+    for w in WORD.findall(s.lower()):
+        for suf in ("ing", "ed", "es", "s"):
+            if w.endswith(suf) and len(w) - len(suf) >= 3:
+                w = w[: -len(suf)]
+                if len(w) >= 3 and w[-1] == w[-2]:   # runn -> run
+                    w = w[:-1]
+                break
+        out.add(w)
+    return out
 
 def _tokens(s: str) -> list[str]:
     return re.findall(r"[a-z0-9]+", s.lower())

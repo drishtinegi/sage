@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "item": 1,
+      "status": "covered",
+      "evidence": "starts when the client sends a SYN packet to the server to ask for a connection",
+      "note": "The student explained that the connection is established prior to data exchange."
+    },
+    {
+      "item": 2,
+      "status": "covered",
+      "evidence": "the client sends a SYN packet to the server",
+      "note": "The student stated that the client initiates the handshake with a SYN packet."
+    },
+    {
+      "item": 3,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention how the initial sequence number is generated."
+    },
+    {
+      "item": 4,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not clarify whether the SYN packet carries application payload data."
+    },
+    {
+      "item": 5,
+      "status": "covered",
+      "evidence": "replies with a SYN-ACK packet",
+      "note": "The student noted the server responds with a packet carrying both flags."
+    },
+    {
+      "item": 6,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain the server's acknowledgment number."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student stopped before mentioning the final ACK packet from the client."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not discuss the mathematical requirement for three messages."
+    }
+  ],
+  "target_item": 8,
+  "target_reason": "Item 8 has the highest weight (3) among missing items and explains why three messages are necessary.",
+  "target_focus": "why three messages are needed across the network"
+}
