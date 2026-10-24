@@ -1,0 +1,4 @@
+Recursion is when a function calls itself.
+It is good for things like factorial.
+All the calls share the same stack frame and the same local variables.
+I think it is always faster than a loop.

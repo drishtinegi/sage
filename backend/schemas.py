@@ -55,3 +55,42 @@ class EvalResult(BaseModel):
     target_item: int | None = None
     target_reason: str = ""
     target_focus: str = ""   # neutral area for the beginner to ask about
+
+class SessionCreate(BaseModel):
+    topic_id: int
+
+
+class SessionOut(BaseModel):
+    session_id: int
+    topic_title: str
+    opening: str
+    turn_cap: int
+
+
+class TurnCreate(BaseModel):
+    text: str = Field(min_length=1, max_length=4000)
+
+
+class TurnOut(BaseModel):
+    turn: int
+    beginner: str
+    ended: bool
+    ended_by: str | None = None
+    seconds: float
+
+
+class ReportItem(BaseModel):
+    position: int
+    text: str
+    weight: int
+    status: str
+    evidence: str
+    note: str
+
+
+class ReportOut(BaseModel):
+    session_id: int
+    topic_title: str
+    score: float
+    ended_by: str
+    items: list[ReportItem]

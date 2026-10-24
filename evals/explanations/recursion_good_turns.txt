@@ -1,0 +1,8 @@
+Recursion is a technique where a function calls itself directly or indirectly to solve a problem.
+Every recursive function needs at least one base case.
+The base case returns a result without making any further recursive calls.
+Each recursive call works on a strictly smaller subproblem than the one before it.
+Each recursive call pushes its own independent stack frame onto the call stack.
+If the base case is missing or never reached, the calls never stop and the stack overflows.
+Any recursive algorithm can be rewritten with a loop instead.
+Tail call optimization lets a compiler reuse the current stack frame when the recursive call is the last operation.

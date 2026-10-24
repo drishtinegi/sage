@@ -12,6 +12,8 @@ from evaluate import evaluate, score, show
 from persona import ask_beginner
 from schemas import TopicBrief
 
+from evaluator import POINTS, check_result, evaluate, score  # noqa: F401
+
 ROOT = Path(__file__).resolve().parents[2]
 RUBRIC_DIR = ROOT / "evals" / "rubrics"
 OUT_DIR = ROOT / "evals" / "transcripts"

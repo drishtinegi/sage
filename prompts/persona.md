@@ -26,3 +26,5 @@ Rules:
 - Never repeat the student's claim back as a condition ("if X is optional", "if it stores
   the value directly"). Ask about the mechanism in your own plain words instead
   ("how does it know when to stop?", "what is actually inside it?").
+- If the Beginner already asked about this area, ask from a different angle: use a
+  small concrete situation ("What would happen if ...?") instead of repeating the question.

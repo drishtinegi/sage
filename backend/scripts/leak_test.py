@@ -10,6 +10,8 @@ from llm import generate
 from persona import ask_beginner
 from schemas import EvalResult, TopicBrief
 
+from evaluator import evaluate
+
 ROOT = Path(__file__).resolve().parents[2]
 RUBRICS = ROOT / "evals" / "rubrics"
 EXPL = ROOT / "evals" / "explanations"

@@ -9,12 +9,15 @@ from brief import make_brief
 from db import Base, engine, get_db
 from models import RubricItem, Topic
 from schemas import TopicCreate, TopicOut
+from sessions import router as sessions_router
 
 log = logging.getLogger("explainback")
 
 Base.metadata.create_all(engine)  # creates the tables if they don't exist
 
 app = FastAPI(title="Explain-Back")
+app.include_router(sessions_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],

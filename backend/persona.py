@@ -60,6 +60,14 @@ def leak_problems(question, brief: TopicBrief, student_text, title, earlier) -> 
     leaked = sorted((_words(q) & vocab) - allowed - COMMON)
     if leaked:
         problems.append(f"uses terms the student never said: {', '.join(leaked)}")
+    
+    qw = _words(q)
+    for prev in earlier:
+        pw = _words(prev)
+        if qw and pw and len(qw & pw) / len(qw | pw) > 0.6:
+            problems.append("repeats an earlier question")
+            break
+        
     return problems
 
 

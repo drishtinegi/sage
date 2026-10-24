@@ -4,39 +4,52 @@
       "item": 1,
       "status": "covered",
       "evidence": "Recursion is when a function calls itself to solve a smaller version of the same problem.",
-      "note": "The student clearly defines recursion as a self-calling function solving smaller instances."
+      "note": "The student clearly defined recursion as a function calling itself."
     },
     {
       "item": 2,
       "status": "covered",
-      "evidence": "Every recursive function needs a base case, which is the condition where it stops calling itself and returns a value directly.",
-      "note": "The student explains the necessity of a base case to terminate execution."
+      "evidence": "Every recursive function needs a base case, which is the condition where it stops calling itself...",
+      "note": "The student stated that a recursive function requires a base case."
     },
     {
       "item": 3,
       "status": "covered",
-      "evidence": "The recursive step has to change the argument, like n minus 1, so each call gets closer to the base case.",
-      "note": "The student explains that arguments must be modified to make progress toward the base case."
+      "evidence": "...and returns a value directly.",
+      "note": "The student explained that the base case returns a result without making further recursive calls."
     },
     {
       "item": 4,
       "status": "covered",
-      "evidence": "Each call is pushed as a new stack frame on the call stack, holding its own parameters and local variables.",
-      "note": "The student covers how each call allocates a new stack frame for its parameters and variables."
+      "evidence": "The recursive step has to change the argument, like n minus 1, so each call gets closer to the base case.",
+      "note": "The student explained that each recursive call operates on a smaller subproblem."
     },
     {
       "item": 5,
       "status": "covered",
-      "evidence": "When the base case is reached, the calls return one by one and the stack unwinds, and each caller uses the returned value to finish its own calculation.",
-      "note": "The student describes stack unwinding and how values pass back through the call frames."
+      "evidence": "Each call is pushed as a new stack frame on the call stack, holding its own parameters and local variables.",
+      "note": "The student explained that independent stack frames are pushed onto the call stack."
     },
     {
       "item": 6,
       "status": "covered",
-      "evidence": "Recursion can be easier to read than a loop, but it uses more memory because of the stack frames.",
-      "note": "The student compares recursion to loops, highlighting the memory overhead of stack frames."
+      "evidence": "If there is no base case, or it is never reached, the frames keep piling up until the stack runs out of space and the program crashes with a stack overflow.",
+      "note": "The student stated that an absent or unreachable base case triggers a stack overflow."
+    },
+    {
+      "item": 7,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not mention that any recursive algorithm can be rewritten iteratively."
+    },
+    {
+      "item": 8,
+      "status": "missing",
+      "evidence": "",
+      "note": "The student did not explain tail call optimization."
     }
   ],
-  "target_item": null,
-  "target_reason": "All rubric items have been fully covered by the student."
+  "target_item": 7,
+  "target_reason": "This is an important foundational concept about the equivalence of recursion and iteration.",
+  "target_focus": "how to do the same thing using loops instead of calling itself"
 }
