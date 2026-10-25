@@ -78,9 +78,13 @@ def create_topic(body: TopicCreate, db: Session = Depends(get_db)):
     db.refresh(topic)
     return to_out(topic)
 
+@app.get("/topics", response_model=list[TopicOut])
+def list_topics(db: Session = Depends(get_db)):
+    topics = db.scalars(
+        select(Topic).where(Topic.source_notes.is_(None)).order_by(Topic.title)
+    ).all()
+    return [to_out(t) for t in topics]
 
-# DEV ONLY: lets you inspect a stored rubric. Remove or lock this before real users;
-# the rubric is only shown to the student in the final report.
 @app.get("/topics/{topic_id}/rubric")
 def dev_rubric(topic_id: int, db: Session = Depends(get_db)):
     topic = db.get(Topic, topic_id)
