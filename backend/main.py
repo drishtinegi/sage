@@ -1,4 +1,5 @@
 import logging
+import os;
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -87,6 +88,9 @@ def list_topics(db: Session = Depends(get_db)):
 
 @app.get("/topics/{topic_id}/rubric")
 def dev_rubric(topic_id: int, db: Session = Depends(get_db)):
+    if os.getenv("DEV_ENDPOINTS") != "1":
+        raise HTTPException(404, "not found")
+        
     topic = db.get(Topic, topic_id)
     if not topic:
         raise HTTPException(404, "topic not found")

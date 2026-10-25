@@ -4,6 +4,8 @@ from pathlib import Path
 from llm import generate
 from schemas import TopicBrief
 
+from wordfreq import word_frequency
+
 PROMPT_FILE = Path(__file__).resolve().parent.parent / "prompts" / "persona.md"
 
 WORD = re.compile(r"[a-z]{5,}")
@@ -67,6 +69,14 @@ def leak_problems(question, brief: TopicBrief, student_text, title, earlier) -> 
         if qw and pw and len(qw & pw) / len(qw | pw) > 0.6:
             problems.append("repeats an earlier question")
             break
+
+    seen = set(re.findall(r"[a-z]+", student_text.lower()))
+    glued = [
+        w for w in re.findall(r"[a-z]{8,}", q.lower())
+        if w not in seen and word_frequency(w, "en") == 0
+    ]
+    if glued:
+        problems.append(f"contains words stuck together: {', '.join(glued)}")
         
     return problems
 

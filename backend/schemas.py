@@ -94,3 +94,18 @@ class ReportOut(BaseModel):
     score: float
     ended_by: str
     items: list[ReportItem]
+
+class MessageOut(BaseModel):
+    role: str
+    text: str
+
+
+class SessionState(BaseModel):
+    session_id: int
+    topic_id: int
+    topic_title: str
+    turn_cap: int
+    status: str            # active | finished
+    ended_by: str | None = None
+    turn: int
+    messages: list[MessageOut]

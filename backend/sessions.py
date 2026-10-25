@@ -12,7 +12,7 @@ from models import ItemStatus, StudySession, Topic, Turn
 from persona import ask_beginner
 from schemas import (
     ConceptMap, EvalResult, ItemEval, ReportItem, ReportOut, RubricItem as RubricSpec,
-    SessionCreate, SessionOut, TopicBrief, TurnCreate, TurnOut,
+    SessionCreate, SessionOut, TopicBrief, TurnCreate, TurnOut, MessageOut, SessionState
 )
 
 log = logging.getLogger("explainback")
@@ -156,6 +156,22 @@ def finish_session(session_id: int, db: Session = Depends(get_db)):
         db.refresh(s)
     return build_report(s)
 
+@router.get("/{session_id}", response_model=SessionState)
+def get_state(session_id: int, db: Session = Depends(get_db)):
+    s = get_session(db, session_id)
+    opening = f"Hi! I know nothing about {s.topic.title}. Can you explain it to me?"
+    msgs = [MessageOut(role="beginner", text=opening)]
+    msgs += [MessageOut(role=t.role, text=t.text) for t in s.turns]
+    if s.status == "finished" and s.ended_by == "all items covered":
+        msgs.append(MessageOut(role="beginner", text=DONE_MESSAGE))
+    elif s.status == "finished" and s.ended_by == "turn cap":
+        msgs.append(MessageOut(role="beginner", text=CAP_MESSAGE))
+    return SessionState(
+        session_id=s.id, topic_id=s.topic_id, topic_title=s.topic.title,
+        turn_cap=TURN_CAP, status=s.status, ended_by=s.ended_by,
+        turn=sum(1 for t in s.turns if t.role == "student"),
+        messages=msgs,
+    )
 
 @router.get("/{session_id}/report", response_model=ReportOut)
 def get_report(session_id: int, db: Session = Depends(get_db)):

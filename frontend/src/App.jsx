@@ -1,13 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { api } from "./api";
 import StartScreen from "./StartScreen";
 import ChatScreen from "./ChatScreen";
 import ReportScreen from "./ReportScreen";
 
+const KEY = "eb_session";
+
+function remember(id) {
+  try { id ? localStorage.setItem(KEY, String(id)) : localStorage.removeItem(KEY); } catch { /* ignore */ }
+}
+
 export default function App() {
-  const [screen, setScreen] = useState("start"); // start | chat | report
-  const [session, setSession] = useState(null);  // { session_id, topic_id, topic_title, opening, turn_cap }
+  const [screen, setScreen] = useState("loading"); // loading | start | chat | report
+  const [session, setSession] = useState(null);    // { session_id, topic_id, topic_title, opening, turn_cap, restored? }
   const [report, setReport] = useState(null);
+
+  useEffect(() => {
+    let id = null;
+    try { id = localStorage.getItem(KEY); } catch { /* ignore */ }
+    if (!id) return setScreen("start");
+    api.getSession(id)
+      .then(async (st) => {
+        if (st.status === "finished") {
+          setReport(await api.getReport(st.session_id));
+          setSession({ session_id: st.session_id, topic_id: st.topic_id, topic_title: st.topic_title });
+          setScreen("report");
+        } else {
+          setSession({ ...st, restored: true });
+          setScreen("chat");
+        }
+      })
+      .catch(() => { remember(null); setScreen("start"); });
+  }, []);
+
+  function begin(s) {
+    remember(s.session_id);
+    setSession(s);
+    setScreen("chat");
+  }
 
   return (
     <main className="app">
@@ -16,34 +47,23 @@ export default function App() {
         <p>Teach it to a curious beginner. Find out what you can't yet explain.</p>
       </header>
 
-      {screen === "start" && (
-        <StartScreen
-          onStarted={(s) => {
-            setSession(s);
-            setScreen("chat");
-          }}
-        />
-      )}
+      {screen === "loading" && <p className="hint">Loading...</p>}
+      {screen === "start" && <StartScreen onStarted={begin} />}
       {screen === "chat" && (
         <ChatScreen
           key={session.session_id}
           session={session}
-          onReport={(r) => {
-            setReport(r);
-            setScreen("report");
-          }}
+          onReport={(r) => { setReport(r); setScreen("report"); }}
         />
       )}
       {screen === "report" && (
         <ReportScreen
           report={report}
           onRetry={async () => {
-            const { api } = await import("./api");
             const s = await api.createSession(session.topic_id);
-            setSession({ ...s, topic_id: session.topic_id });
-            setScreen("chat");
+            begin({ ...s, topic_id: session.topic_id });
           }}
-          onNewTopic={() => setScreen("start")}
+          onNewTopic={() => { remember(null); setScreen("start"); }}
         />
       )}
     </main>

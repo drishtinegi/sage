@@ -34,4 +34,5 @@ export const api = {
   sendTurn: (sessionId, text) => post(`/sessions/${sessionId}/turns`, { text }),
   finish: (sessionId) => post(`/sessions/${sessionId}/finish`),
   getReport: (sessionId) => request(`/sessions/${sessionId}/report`),
+  getSession: (sessionId) => request(`/sessions/${sessionId}`),
 };

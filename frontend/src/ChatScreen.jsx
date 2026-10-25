@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { api } from "./api";
 
 export default function ChatScreen({ session, onReport }) {
-  const [messages, setMessages] = useState([{ role: "beginner", text: session.opening }]);
+  const restored = session.restored;
+  const [messages, setMessages] = useState(
+    restored ? session.messages : [{ role: "beginner", text: session.opening }]
+  );
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [turn, setTurn] = useState(0);
+  const [turn, setTurn] = useState(restored ? session.turn : 0);
   const [error, setError] = useState("");
   const [failedText, setFailedText] = useState(null);
   const [ended, setEnded] = useState(false);
