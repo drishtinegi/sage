@@ -109,3 +109,36 @@ class SessionState(BaseModel):
     ended_by: str | None = None
     turn: int
     messages: list[MessageOut]
+
+class MisconceptionShown(BaseModel):
+    belief: str
+    evidence: str
+
+
+class WriterStep(BaseModel):
+    item: int
+    kind: Literal["re-explain", "practice question"]
+    why: str
+    practice_prompt: str
+
+
+class WriterResult(BaseModel):
+    summary: str
+    misconceptions: list[MisconceptionShown] = []
+    plan: list[WriterStep]
+
+
+class PlanStepOut(BaseModel):
+    position: int
+    text: str
+    weight: int
+    status: str
+    kind: str
+    why: str
+    practice_prompt: str
+
+
+class PlanOut(BaseModel):
+    summary: str
+    misconceptions: list[MisconceptionShown]
+    steps: list[PlanStepOut]

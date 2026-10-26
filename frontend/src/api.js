@@ -27,6 +27,14 @@ async function request(path, options = {}) {
 const post = (path, data) =>
   request(path, { method: "POST", body: data ? JSON.stringify(data) : undefined });
 
+const inflight = new Map();
+function once(key, fn) {
+  if (!inflight.has(key)) {
+    inflight.set(key, fn().finally(() => setTimeout(() => inflight.delete(key), 1000)));
+  }
+  return inflight.get(key);
+}
+
 export const api = {
   listTopics: () => request("/topics"),
   createTopic: (title, notes) => post("/topics", { title, notes: notes || null }),
@@ -35,4 +43,5 @@ export const api = {
   finish: (sessionId) => post(`/sessions/${sessionId}/finish`),
   getReport: (sessionId) => request(`/sessions/${sessionId}/report`),
   getSession: (sessionId) => request(`/sessions/${sessionId}`),
+  getPlan: (sessionId) => once(`plan-${sessionId}`, () => request(`/sessions/${sessionId}/plan`)),
 };

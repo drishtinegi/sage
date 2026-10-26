@@ -13,24 +13,18 @@ API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ["GOOGLE_API_KEY"]
 client = genai.Client(api_key=API_KEY)
 
 
-def _config(json_mode: bool, temperature: float | None, model_env: str):
+def _config(json_mode, temperature, model_env, use_thinking):
     kwargs = dict(
         response_mime_type="application/json" if json_mode else None,
         temperature=temperature,
     )
     budget = os.environ.get("LLM_THINKING_BUDGET", "").strip()
-    if budget and model_env == "LLM_MODEL_CHEAP":
+    if use_thinking and budget and model_env == "LLM_MODEL_CHEAP":
         kwargs["thinking_config"] = types.ThinkingConfig(thinking_budget=int(budget))
     return types.GenerateContentConfig(**kwargs)
 
 
-def generate(
-    prompt: str,
-    model_env: str = "LLM_MODEL_STRONG",
-    json_mode: bool = True,
-    temperature: float | None = None,
-) -> str:
-    config = _config(json_mode, temperature, model_env)
+def generate(prompt, model_env="LLM_MODEL_STRONG", json_mode=True, temperature=None):
     models = [os.environ[model_env]]
     fallback = os.environ.get("LLM_MODEL_FALLBACK")
     if fallback and fallback not in models:
@@ -38,7 +32,9 @@ def generate(
 
     last_error = None
     for model in models:
+        use_thinking = True
         for attempt in range(4):
+            config = _config(json_mode, temperature, model_env, use_thinking)
             try:
                 resp = client.models.generate_content(model=model, contents=prompt, config=config)
                 return resp.text
@@ -49,6 +45,10 @@ def generate(
                 time.sleep(wait)
             except ClientError as e:
                 last_error = e
-                print(f"[{model}] {e.code} not usable ({str(e)[:100]}), trying next model...")
+                if e.code == 400 and use_thinking and os.environ.get("LLM_THINKING_BUDGET", "").strip():
+                    print(f"[{model}] 400 with thinking setting, retrying without it")
+                    use_thinking = False
+                    continue
+                print(f"[{model}] {e.code} not usable: {str(e)[:300]}")
                 break
     raise RuntimeError(f"all models unavailable: {last_error}")

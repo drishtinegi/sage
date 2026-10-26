@@ -80,3 +80,14 @@ class ItemStatus(Base):
     status: Mapped[str]
     evidence: Mapped[str] = mapped_column(Text, default="")
     note: Mapped[str] = mapped_column(Text, default="")
+
+
+class Plan(Base):
+    __tablename__ = "plans"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    session_id: Mapped[int] = mapped_column(ForeignKey("sessions.id"), unique=True)
+    summary: Mapped[str] = mapped_column(Text)
+    misconceptions: Mapped[list] = mapped_column(JSON, default=list)
+    steps: Mapped[list] = mapped_column(JSON, default=list)  # [{item, kind, why, practice_prompt}] in priority order
+    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)

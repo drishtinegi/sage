@@ -52,6 +52,9 @@ Rules:
   never the name of the concept.
 - Never write "dependency", "functional" or any other name of a concept in the focus.
    Say "how one column's value decides another's" instead.
+- If the student states something that contradicts the idea anywhere in their
+  explanation, even if they also state it correctly elsewhere, the item is at best "partial".
+  Quote the contradicting words in "evidence".
 
 Return ONLY valid JSON, no markdown fences, no commentary, in this shape:
 

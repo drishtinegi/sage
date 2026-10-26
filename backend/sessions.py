@@ -5,15 +5,18 @@ from datetime import datetime
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 
 from db import get_db
 from evaluator import evaluate, score
-from models import ItemStatus, StudySession, Topic, Turn
+from models import ItemStatus, StudySession, Topic, Turn, Plan
 from persona import ask_beginner
 from schemas import (
     ConceptMap, EvalResult, ItemEval, ReportItem, ReportOut, RubricItem as RubricSpec,
-    SessionCreate, SessionOut, TopicBrief, TurnCreate, TurnOut, MessageOut, SessionState
+    SessionCreate, SessionOut, TopicBrief, TurnCreate, TurnOut, MessageOut, SessionState, MisconceptionShown, PlanOut, PlanStepOut
 )
+from report_writer import write_plan
 
 log = logging.getLogger("explainback")
 router = APIRouter(prefix="/sessions", tags=["sessions"])
@@ -39,6 +42,58 @@ def get_session(db: Session, session_id: int) -> StudySession:
         raise HTTPException(404, "session not found")
     return s
 
+def last_statuses(s: StudySession) -> dict[int, tuple[str, str, str]]:
+    last = max(r.turn_number for r in s.statuses)
+    return {r.position: (r.status, r.evidence, r.note) for r in s.statuses if r.turn_number == last}
+
+
+def plan_to_out(s: StudySession, plan: Plan) -> PlanOut:
+    brief = load_brief(s.topic)
+    statuses = last_statuses(s)
+    steps = []
+    for st in plan.steps:
+        n = st["item"]
+        spec = brief.rubric[n - 1]
+        steps.append(PlanStepOut(
+            position=n, text=spec.text, weight=spec.weight, status=statuses[n][0],
+            kind=st["kind"], why=st["why"], practice_prompt=st["practice_prompt"],
+        ))
+    return PlanOut(
+        summary=plan.summary,
+        misconceptions=[MisconceptionShown(**m) for m in plan.misconceptions],
+        steps=steps,
+    )
+
+
+@router.get("/{session_id}/plan", response_model=PlanOut)
+def get_plan(session_id: int, db: Session = Depends(get_db)):
+    s = get_session(db, session_id)
+    if s.status == "active":
+        raise HTTPException(409, "the plan is available after the session ends")
+    if not s.statuses:
+        raise HTTPException(400, "nothing to plan yet")
+
+    plan = db.scalars(select(Plan).where(Plan.session_id == s.id)).first()
+    if not plan:
+        student_text = "\n".join(t.text for t in s.turns if t.role == "student")
+        try:
+            data = write_plan(load_brief(s.topic), last_statuses(s), student_text, s.score or 0.0)
+        except Exception:
+            log.exception("report writer failed")
+            raise HTTPException(502, "Could not write your revision plan right now. Please try again.")
+        plan = Plan(
+            session_id=s.id,
+            summary=data.summary,
+            misconceptions=[m.model_dump() for m in data.misconceptions],
+            steps=[p.model_dump() for p in data.plan],
+        )
+        db.add(plan)
+        try:
+            db.commit()
+        except IntegrityError:  # a parallel request stored it first
+            db.rollback()
+            plan = db.scalars(select(Plan).where(Plan.session_id == session_id)).first()
+    return plan_to_out(s, plan)
 
 def build_report(s: StudySession) -> ReportOut:
     brief = load_brief(s.topic)

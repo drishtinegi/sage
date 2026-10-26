@@ -192,7 +192,7 @@
 }
 
 .app-header h1 { 
-  margin: 0 0 4px; 
+  margin: 20px 20px 4px; 
 }
 
 .app-header p { 
@@ -272,7 +272,7 @@
 .bubble.student { align-self: flex-end; background: #dcfce7; }
 .bubble.typing { color: #666; font-style: italic; }
 
-.score { font-size: 48px; font-weight: 700; margin: 0; }
+.score { font-size: 48px; font-weight: 700; margin: 20px; }
 .items { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .item { border: 1px solid #ddd; border-left-width: 5px; border-radius: 8px; padding: 10px 12px; }
 .item.covered { border-left-color: #16a34a; }
@@ -286,3 +286,9 @@
 .item-text { margin: 8px 0 4px; font-weight: 600; }
 .quote { margin: 4px 0; font-style: italic; color: #444; }
 .note { margin: 4px 0; color: #555; font-size: 14px; }
+
+.plan { margin: 16px 0; padding: 12px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; }
+.steps { padding-left: 20px; display: flex; flex-direction: column; gap: 12px; }
+.step { padding: 8px 4px; }
+.practice { margin: 6px 0 0; padding: 8px 10px; background: #eef2ff; border-radius: 6px; }
+.miscs { padding-left: 20px; }
