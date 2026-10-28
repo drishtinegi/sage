@@ -2,9 +2,10 @@ import logging
 import os
 import time
 from datetime import datetime
+import re
 
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends, HTTPException, Header
+from sqlalchemy.orm import Session, object_session
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
@@ -14,9 +15,11 @@ from models import ItemStatus, StudySession, Topic, Turn, Plan
 from persona import ask_beginner
 from schemas import (
     ConceptMap, EvalResult, ItemEval, ReportItem, ReportOut, RubricItem as RubricSpec,
-    SessionCreate, SessionOut, TopicBrief, TurnCreate, TurnOut, MessageOut, SessionState, MisconceptionShown, PlanOut, PlanStepOut
+    SessionCreate, SessionOut, TopicBrief, TurnCreate, TurnOut, MessageOut, SessionState, MisconceptionShown, PlanOut, PlanStepOut, HistoryItem
 )
 from report_writer import write_plan
+
+
 
 log = logging.getLogger("explainback")
 router = APIRouter(prefix="/sessions", tags=["sessions"])
@@ -36,9 +39,15 @@ def load_brief(topic: Topic) -> TopicBrief:
     )
 
 
-def get_session(db: Session, session_id: int) -> StudySession:
+def learner_id(x_learner: str | None = Header(default=None)) -> str | None:
+    if x_learner and re.fullmatch(r"[A-Za-z0-9-]{16,64}", x_learner):
+        return x_learner
+    return None
+
+
+def get_session(db: Session, session_id: int, learner: str | None = None) -> StudySession:
     s = db.get(StudySession, session_id)
-    if not s:
+    if not s or (s.owner and s.owner != learner):
         raise HTTPException(404, "session not found")
     return s
 
@@ -46,6 +55,32 @@ def last_statuses(s: StudySession) -> dict[int, tuple[str, str, str]]:
     last = max(r.turn_number for r in s.statuses)
     return {r.position: (r.status, r.evidence, r.note) for r in s.statuses if r.turn_number == last}
 
+def attempt_info(s: StudySession):
+    """Returns (attempt number, previous score, items fixed since last attempt)."""
+    if not s.owner:
+        return 1, None, []
+    db = object_session(s)
+    rows = db.scalars(
+        select(StudySession)
+        .where(
+            StudySession.owner == s.owner,
+            StudySession.topic_id == s.topic_id,
+            StudySession.status == "finished",
+        )
+        .order_by(StudySession.started_at, StudySession.id)
+    ).all()
+    ids = [r.id for r in rows]
+    if s.id not in ids:
+        return 1, None, []
+    idx = ids.index(s.id)
+    if idx == 0:
+        return 1, None, []
+    prev = rows[idx - 1]
+    prev_st = last_statuses(prev) if prev.statuses else {}
+    cur = last_statuses(s)
+    fixed = [n for n, (st, _, _) in cur.items()
+             if st == "covered" and prev_st.get(n, ("", "", ""))[0] != "covered"]
+    return idx + 1, prev.score, fixed
 
 def plan_to_out(s: StudySession, plan: Plan) -> PlanOut:
     brief = load_brief(s.topic)
@@ -66,8 +101,8 @@ def plan_to_out(s: StudySession, plan: Plan) -> PlanOut:
 
 
 @router.get("/{session_id}/plan", response_model=PlanOut)
-def get_plan(session_id: int, db: Session = Depends(get_db)):
-    s = get_session(db, session_id)
+def get_plan(session_id: int, db: Session = Depends(get_db), learner: str | None = Depends(learner_id)):
+    s = get_session(db, session_id, learner)
     if s.status == "active":
         raise HTTPException(409, "the plan is available after the session ends")
     if not s.statuses:
@@ -78,9 +113,11 @@ def get_plan(session_id: int, db: Session = Depends(get_db)):
         student_text = "\n".join(t.text for t in s.turns if t.role == "student")
         try:
             data = write_plan(load_brief(s.topic), last_statuses(s), student_text, s.score or 0.0)
-        except Exception:
+        except Exception as e:
             log.exception("report writer failed")
-            raise HTTPException(502, "Could not write your revision plan right now. Please try again.")
+            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                raise HTTPException(503, "The AI service has reached its usage limit. Please try again later.")
+            raise HTTPException(502, "Could not process that right now. Please try again.")
         plan = Plan(
             session_id=s.id,
             summary=data.summary,
@@ -106,18 +143,20 @@ def build_report(s: StudySession) -> ReportOut:
             position=n, text=spec.text, weight=spec.weight,
             status=r.status, evidence=r.evidence, note=r.note,
         ))
+    attempt, prev_score, fixed = attempt_info(s)
     return ReportOut(
         session_id=s.id, topic_title=s.topic.title, score=s.score or 0.0,
         ended_by=s.ended_by or "", items=items,
+        attempt=attempt, previous_score=prev_score, fixed=fixed,
     )
 
 
 @router.post("", response_model=SessionOut)
-def create_session(body: SessionCreate, db: Session = Depends(get_db)):
+def create_session(body: SessionCreate, db: Session = Depends(get_db), learner: str | None = Depends(learner_id)):
     topic = db.get(Topic, body.topic_id)
     if not topic:
         raise HTTPException(404, "topic not found")
-    s = StudySession(topic_id=topic.id)
+    s = StudySession(topic_id=topic.id, owner=learner)
     db.add(s)
     db.commit()
     db.refresh(s)
@@ -130,8 +169,8 @@ def create_session(body: SessionCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/{session_id}/turns", response_model=TurnOut)
-def add_turn(session_id: int, body: TurnCreate, db: Session = Depends(get_db)):
-    s = get_session(db, session_id)
+def add_turn(session_id: int, body: TurnCreate, db: Session = Depends(get_db), learner: str | None = Depends(learner_id)):
+    s = get_session(db, session_id, learner)
     if s.status != "active":
         raise HTTPException(409, "this session has ended")
     text = body.text.strip()
@@ -147,9 +186,10 @@ def add_turn(session_id: int, body: TurnCreate, db: Session = Depends(get_db)):
     t0 = time.time()
     try:
         result = evaluate(brief, "\n".join(student))
-    except Exception:
+    except Exception as e:
         log.exception("evaluator failed")
-        # nothing was saved, so the student can send the same message again
+        if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+            raise HTTPException(503, "The AI service has reached its usage limit. Please try again later.")
         raise HTTPException(502, "Could not process that right now. Please try again.")
 
     ended_by, question, problems = None, None, []
@@ -192,8 +232,8 @@ def add_turn(session_id: int, body: TurnCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/{session_id}/finish", response_model=ReportOut)
-def finish_session(session_id: int, db: Session = Depends(get_db)):
-    s = get_session(db, session_id)
+def finish_session(session_id: int, db: Session = Depends(get_db), learner: str | None = Depends(learner_id)):
+    s = get_session(db, session_id, learner)
     if s.status == "active":
         if not s.statuses:
             raise HTTPException(400, "Nothing to report yet. Explain the topic first.")
@@ -212,8 +252,8 @@ def finish_session(session_id: int, db: Session = Depends(get_db)):
     return build_report(s)
 
 @router.get("/{session_id}", response_model=SessionState)
-def get_state(session_id: int, db: Session = Depends(get_db)):
-    s = get_session(db, session_id)
+def get_state(session_id: int, db: Session = Depends(get_db), learner: str | None = Depends(learner_id)):
+    s = get_session(db, session_id, learner)
     opening = f"Hi! I know nothing about {s.topic.title}. Can you explain it to me?"
     msgs = [MessageOut(role="beginner", text=opening)]
     msgs += [MessageOut(role=t.role, text=t.text) for t in s.turns]
@@ -229,8 +269,31 @@ def get_state(session_id: int, db: Session = Depends(get_db)):
     )
 
 @router.get("/{session_id}/report", response_model=ReportOut)
-def get_report(session_id: int, db: Session = Depends(get_db)):
-    s = get_session(db, session_id)
+def get_report(session_id: int, db: Session = Depends(get_db), learner: str | None = Depends(learner_id)):
+    s = get_session(db, session_id, learner)
     if s.status == "active":
         raise HTTPException(409, "the report is available after the session ends")
     return build_report(s)
+
+
+history_router = APIRouter(tags=["history"])
+
+
+@history_router.get("/history", response_model=list[HistoryItem])
+def history(db: Session = Depends(get_db), learner: str | None = Depends(learner_id)):
+    if not learner:
+        return []
+    rows = db.scalars(
+        select(StudySession)
+        .where(StudySession.owner == learner, StudySession.status == "finished")
+        .order_by(StudySession.started_at, StudySession.id)
+    ).all()
+    counts, out = {}, []
+    for r in rows:
+        counts[r.topic_id] = counts.get(r.topic_id, 0) + 1
+        out.append(HistoryItem(
+            session_id=r.id, topic_id=r.topic_id, topic_title=r.topic.title,
+            attempt=counts[r.topic_id], score=r.score or 0.0,
+            ended_by=r.ended_by or "", ended_at=r.ended_at,
+        ))
+    return list(reversed(out))[:30]

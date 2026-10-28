@@ -48,7 +48,17 @@ export default function App() {
       </header>
 
       {screen === "loading" && <p className="hint">Loading...</p>}
-      {screen === "start" && <StartScreen onStarted={begin} />}
+      {screen === "start" && (
+        <StartScreen
+          onStarted={begin}
+          onOpenReport={async (h) => {
+            const r = await api.getReport(h.session_id);
+            setReport(r);
+            setSession({ session_id: h.session_id, topic_id: h.topic_id, topic_title: h.topic_title });
+            setScreen("report");
+          }}
+        />
+      )}
       {screen === "chat" && (
         <ChatScreen
           key={session.session_id}

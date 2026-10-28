@@ -10,7 +10,7 @@ API = "http://localhost:8000"
 def main() -> None:
     topic_id = int(sys.argv[1])
     lines = [l.strip() for l in Path(sys.argv[2]).read_text(encoding="utf-8").splitlines() if l.strip()]
-    with httpx.Client(base_url=API, timeout=180) as c:
+    with httpx.Client(base_url=API, timeout=180, headers={"X-Learner": "script-test-learner-0001"}) as c:
         s = c.post("/sessions", json={"topic_id": topic_id}).json()
         sid = s["session_id"]
         print("Beginner:", s["opening"])

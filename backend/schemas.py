@@ -2,6 +2,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
+from datetime import datetime
 
 class ConceptMap(BaseModel):
     key_ideas: list[str]
@@ -44,11 +45,6 @@ class ItemEval(BaseModel):
     note: str = ""                 # one short reason
 
 
-class EvalResult(BaseModel):
-    items: list[ItemEval]
-    target_item: int | None = None  # the most important gap to ask about next
-    target_reason: str = ""
-
 
 class EvalResult(BaseModel):
     items: list[ItemEval]
@@ -87,13 +83,16 @@ class ReportItem(BaseModel):
     evidence: str
     note: str
 
-
 class ReportOut(BaseModel):
     session_id: int
     topic_title: str
     score: float
     ended_by: str
     items: list[ReportItem]
+    attempt: int = 1
+    previous_score: float | None = None
+    fixed: list[int] = []     # rubric items not covered last time, covered now
+
 
 class MessageOut(BaseModel):
     role: str
@@ -142,3 +141,12 @@ class PlanOut(BaseModel):
     summary: str
     misconceptions: list[MisconceptionShown]
     steps: list[PlanStepOut]
+
+class HistoryItem(BaseModel):
+    session_id: int
+    topic_id: int
+    topic_title: str
+    attempt: int
+    score: float
+    ended_by: str
+    ended_at: datetime | None = None

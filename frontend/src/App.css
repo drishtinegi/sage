@@ -1,4 +1,4 @@
-.counter {
+/* .counter {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -181,7 +181,7 @@
     right: 0;
     border-right-color: var(--border);
   }
-}
+} */
 
 .app { 
   max-width: 720px; 
@@ -292,3 +292,11 @@
 .step { padding: 8px 4px; }
 .practice { margin: 6px 0 0; padding: 8px 10px; background: #eef2ff; border-radius: 6px; }
 .miscs { padding-left: 20px; }
+
+.card { text-align: left; }
+.app-header { text-align: center; }
+.app-header h1 { font-size: 32px; margin: 0 0 6px; }
+.score { margin: 8px 0; line-height: 1.1; }
+
+.compare { margin: 0 0 8px; font-weight: 600; color: #166534; }
+.history { padding-left: 18px; }

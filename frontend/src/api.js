@@ -1,10 +1,25 @@
 const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
+let memoryId = null;
+function learnerId() {
+  try {
+    let id = localStorage.getItem("eb_learner");
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem("eb_learner", id);
+    }
+    return id;
+  } catch {
+    memoryId = memoryId || crypto.randomUUID();
+    return memoryId;
+  }
+}
+
 async function request(path, options = {}) {
   let res;
   try {
     res = await fetch(`${API}${path}`, {
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "X-Learner": learnerId() },
       ...options,
     });
   } catch {
@@ -44,4 +59,5 @@ export const api = {
   getReport: (sessionId) => request(`/sessions/${sessionId}/report`),
   getSession: (sessionId) => request(`/sessions/${sessionId}`),
   getPlan: (sessionId) => once(`plan-${sessionId}`, () => request(`/sessions/${sessionId}/plan`)),
+  history: () => request("/history"),
 };

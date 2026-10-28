@@ -1,5 +1,5 @@
 import logging
-import os;
+import os
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,7 +10,7 @@ from brief import make_brief
 from db import Base, engine, get_db
 from models import RubricItem, Topic
 from schemas import TopicCreate, TopicOut
-from sessions import router as sessions_router
+from sessions import router as sessions_router, history_router
 
 log = logging.getLogger("explainback")
 
@@ -18,6 +18,8 @@ Base.metadata.create_all(engine)  # creates the tables if they don't exist
 
 app = FastAPI(title="Explain-Back")
 app.include_router(sessions_router)
+
+app.include_router(history_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -57,9 +59,11 @@ def create_topic(body: TopicCreate, db: Session = Depends(get_db)):
 
     try:
         brief = make_brief(title, notes)
-    except Exception:
-        log.exception("brief generation failed")
-        raise HTTPException(502, "Could not build the topic right now. Please try again.")
+    except Exception as e:
+        log.exception("evaluator failed")
+        if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+            raise HTTPException(503, "The AI service has reached its usage limit. Please try again later.")
+        raise HTTPException(502, "Could not process that right now. Please try again.")
 
     topic = Topic(
         title=title,

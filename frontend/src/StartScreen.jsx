@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { api } from "./api";
 
-export default function StartScreen({ onStarted }) {
+export default function StartScreen({ onStarted, onOpenReport }) {
   const [topics, setTopics] = useState([]);
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [showNotes, setShowNotes] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    api.history().then(setHistory).catch(() => {});
+  }, []);
 
   useEffect(() => {
     api.listTopics().then(setTopics).catch((e) => setError(e.message));
@@ -87,6 +92,25 @@ export default function StartScreen({ onStarted }) {
         <p className="hint">New topics can take up to 30 seconds. Saved topics start at once.</p>
       )}
       {error && <p className="error">{error}</p>}
+
+      {history.length > 0 && (
+        <>
+          <h3>Your past attempts</h3>
+          <ul className="history">
+            {history.map((h) => (
+              <li key={h.session_id}>
+                <button className="link" onClick={() => onOpenReport(h).catch((e) => setError(e.message))}>
+                  {h.topic_title}, attempt {h.attempt}
+                </button>
+                <span className="hint">
+                  {" "}{Math.round(h.score)}%
+                  {h.ended_at ? ` · ${new Date(h.ended_at + "Z").toLocaleDateString()}` : ""}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </section>
   );
 }

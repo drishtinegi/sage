@@ -45,6 +45,7 @@ class StudySession(Base):
     score: Mapped[float | None] = mapped_column(default=None)
     started_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
     ended_at: Mapped[datetime | None] = mapped_column(default=None)
+    owner: Mapped[str | None] = mapped_column(default=None, index=True)
 
     topic: Mapped["Topic"] = relationship()
     turns: Mapped[list["Turn"]] = relationship(

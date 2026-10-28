@@ -90,6 +90,16 @@ export default function ReportScreen({ report, onRetry, onNewTopic }) {
     <section className="card">
       <h2>Your report: {report.topic_title}</h2>
       <p className="score">{Math.round(report.score)}%</p>
+      {report.attempt > 1 && report.previous_score != null && (() => {
+        const d = Math.round(report.score) - Math.round(report.previous_score);
+        return (
+          <p className="compare">
+            Attempt {report.attempt}: {d > 0 ? `up ${d} points` : d < 0 ? `down ${-d} points` : "same score"} from{" "}
+            {Math.round(report.previous_score)}%
+            {report.fixed.length > 0 && `, ${report.fixed.length} gap${report.fixed.length > 1 ? "s" : ""} closed`}
+          </p>
+        );
+      })()}
       <p className="hint">
         {ENDED[report.ended_by] || report.ended_by} &middot;{" "}
         {Object.entries(counts).map(([k, v]) => `${v} ${LABEL[k].toLowerCase()}`).join(", ")}
@@ -116,7 +126,7 @@ export default function ReportScreen({ report, onRetry, onNewTopic }) {
         <button className="btn" onClick={onRetry}>Retry this topic</button>
         <button className="btn secondary" onClick={onNewTopic}>Choose another topic</button>
       </div>
-      <p className="hint">Score comparison across attempts arrives on Day 11.</p>
+      
     </section>
   );
 }
